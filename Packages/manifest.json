@@ -11,6 +11,8 @@
     "com.unity.timeline": "1.4.8",
     "com.unity.ugui": "1.0.0",
     "com.unity.xr.legacyinputhelpers": "2.1.8",
+    "org.gameengine.core.unity": "file:C:/Dev/GameEngines/GameEngine.Unity/Assets/GameEngine.Core.Unity",
+    "org.gameengine.pmr.unity": "file:C:/Dev/GameEngines/GameEngine.Unity/Assets/GameEngine.PMR.Unity",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",

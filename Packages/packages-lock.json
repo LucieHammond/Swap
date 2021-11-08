@@ -102,6 +102,18 @@
       },
       "url": "https://packages.unity.com"
     },
+    "org.gameengine.core.unity": {
+      "version": "file:C:/Dev/GameEngines/GameEngine.Unity/Assets/GameEngine.Core.Unity",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "org.gameengine.pmr.unity": {
+      "version": "file:C:/Dev/GameEngines/GameEngine.Unity/Assets/GameEngine.PMR.Unity",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,

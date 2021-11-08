@@ -75,3 +75,12 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+
+# ========================================
+#         CUSTOM
+# ========================================
+
+# GameEngine user settings
+Assets/Packages/GameEngine/UserSettings/
+Assets/Packages/GameEngine/UserSettings.meta
