@@ -1,10 +1,14 @@
 using GameEngine.PMR.Process;
 using GameEngine.PMR.Unity.Process;
+using Swap.Setups;
 
-public class SwapRoot : ApplicationRoot
+namespace Swap
 {
-    protected override IGameProcessSetup GetProcessSetup()
+    public class SwapRoot : ApplicationRoot
     {
-        return new MainProcessSetup();
+        protected override IGameProcessSetup GetProcessSetup()
+        {
+            return new MainProcessSetup();
+        }
     }
 }

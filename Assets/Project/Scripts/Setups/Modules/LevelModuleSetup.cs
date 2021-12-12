@@ -8,70 +8,73 @@ using GameEngine.PMR.Unity.Modules;
 using System;
 using System.Collections.Generic;
 
-public class LevelModuleSetup : IGameModuleSetup
+namespace Swap.Setups.Modules
 {
-    public string Name => "GameLevel";
-
-    public Type RequiredServiceSetup => typeof(ServiceModuleSetup);
-
-    public Type RequiredParentSetup => null;
-
-    public void SetRules(ref RulesDictionary rules)
+    public class LevelModuleSetup : IGameModuleSetup
     {
+        public string Name => "GameLevel";
 
-    }
+        public Type RequiredServiceSetup => typeof(ServiceModuleSetup);
 
-    public List<Type> GetInitUnloadOrder()
-    {
-        return new List<Type>();
-    }
+        public Type RequiredParentSetup => null;
 
-    public List<RuleScheduling> GetUpdateScheduler()
-    {
-        return new List<RuleScheduling>();
-    }
-
-    public List<RuleScheduling> GetFixedUpdateScheduler()
-    {
-        return new List<RuleScheduling>();
-    }
-
-    public List<RuleScheduling> GetLateUpdateScheduler()
-    {
-        return new List<RuleScheduling>();
-    }
-
-    public ExceptionPolicy GetExceptionPolicy()
-    {
-        return new ExceptionPolicy()
+        public void SetRules(ref RulesDictionary rules)
         {
-            ReactionDuringLoad = OnExceptionBehaviour.UnloadModule,
-            ReactionDuringUpdate = OnExceptionBehaviour.PauseModule,
-            ReactionDuringUnload = OnExceptionBehaviour.UnloadModule,
-            FallbackModule = null
-        };
-    }
 
-    public PerformancePolicy GetPerformancePolicy()
-    {
-        return new PerformancePolicy()
+        }
+
+        public List<Type> GetInitUnloadOrder()
         {
-            MaxFrameDuration = 20,
-            CheckStallingRules = true,
-            InitStallingTimeout = 200,
-            UpdateStallingTimeout = 40,
-            UnloadStallingTimeout = 150,
-            NbWarningsBeforeException = 3
-        };
-    }
+            return new List<Type>();
+        }
 
-    public void SetSpecialTasks(ref List<SpecialTask> tasks)
-    {
-        UnityModule.SetSpecialTasks(ref tasks);
-    }
+        public List<RuleScheduling> GetUpdateScheduler()
+        {
+            return new List<RuleScheduling>();
+        }
 
-    public Transition GetTransition()
-    {
-        return null;
+        public List<RuleScheduling> GetFixedUpdateScheduler()
+        {
+            return new List<RuleScheduling>();
+        }
+
+        public List<RuleScheduling> GetLateUpdateScheduler()
+        {
+            return new List<RuleScheduling>();
+        }
+
+        public ExceptionPolicy GetExceptionPolicy()
+        {
+            return new ExceptionPolicy()
+            {
+                ReactionDuringLoad = OnExceptionBehaviour.UnloadModule,
+                ReactionDuringUpdate = OnExceptionBehaviour.PauseModule,
+                ReactionDuringUnload = OnExceptionBehaviour.UnloadModule,
+                FallbackModule = null
+            };
+        }
+
+        public PerformancePolicy GetPerformancePolicy()
+        {
+            return new PerformancePolicy()
+            {
+                MaxFrameDuration = 20,
+                CheckStallingRules = true,
+                InitStallingTimeout = 200,
+                UpdateStallingTimeout = 40,
+                UnloadStallingTimeout = 150,
+                NbWarningsBeforeException = 3
+            };
+        }
+
+        public void SetSpecialTasks(ref List<SpecialTask> tasks)
+        {
+            UnityModule.SetSpecialTasks(ref tasks);
+        }
+
+        public Transition GetTransition()
+        {
+            return null;
+        }
     }
 }

@@ -1,21 +1,25 @@
 using GameEngine.PMR.Modules;
 using GameEngine.PMR.Process;
+using Swap.Setups.Modules;
 using System.Collections.Generic;
 
-public class MainProcessSetup : IGameProcessSetup
+namespace Swap.Setups
 {
-    public string Name => "MainProcess";
-
-    public IGameModuleSetup GetServiceSetup()
+    public class MainProcessSetup : IGameProcessSetup
     {
-        return new ServiceModuleSetup();
-    }
+        public string Name => "MainProcess";
 
-    public List<IGameModuleSetup> GetFirstGameModes()
-    {
-        return new List<IGameModuleSetup>()
+        public IGameModuleSetup GetServiceSetup()
         {
-            new LevelModuleSetup()
-        };
+            return new ServiceModuleSetup();
+        }
+
+        public List<IGameModuleSetup> GetFirstGameModes()
+        {
+            return new List<IGameModuleSetup>()
+            {
+                new LevelModuleSetup()
+            };
+        }
     }
 }
