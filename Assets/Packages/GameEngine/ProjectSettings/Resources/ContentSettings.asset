@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Configuration:
     EnableContentData: 1
-    DataContentPath: Assets/StreamingAssets/Data/
+    DataContentPath: Assets/StreamingAssets/Dataset/
     FileContentFormat: 0
     FileEncodingType: 0
     EnableContentDescriptors: 1
-    DescriptorContentPath: Assets/StreamingAssets/Bundle/
+    DescriptorContentPath: Assets/StreamingAssets/Bundles/
     DescriptorBundleName: descriptors
     EnableContentAssets: 1
-    AssetContentPath: Assets/StreamingAssets/Bundle/
+    AssetContentPath: Assets/StreamingAssets/Bundles/

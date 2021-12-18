@@ -85,8 +85,5 @@ crashlytics-build.properties
 Assets/Packages/GameEngine/UserSettings/
 Assets/Packages/GameEngine/UserSettings.meta
 
-# StreamingAssets
+# AssetBundles folder
 Assets/StreamingAssets/Bundles/
-!Assets/StreamingAssets/Bundles/bundle_root*
-Assets/StreamingAssets/Data/
-!Assets/StreamingAssets/Data/data_root*
