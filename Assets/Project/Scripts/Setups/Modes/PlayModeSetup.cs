@@ -43,7 +43,8 @@ namespace Swap.Setups.Modes
         {
             return new List<RuleScheduling>()
             {
-                new RuleScheduling(typeof(CharacterRule), 1, 0)
+                new RuleScheduling(typeof(CharacterRule), 1, 0),
+                new RuleScheduling(typeof(CameraRule), 1, 0),
             };
         }
 
@@ -56,7 +57,6 @@ namespace Swap.Setups.Modes
         {
             return new List<RuleScheduling>()
             {
-                new RuleScheduling(typeof(CameraRule), 1, 0),
                 new RuleScheduling(typeof(ControllerRule), 1, 0)
             };
         }

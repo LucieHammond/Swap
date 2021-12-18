@@ -40,11 +40,10 @@ namespace Swap.Rules.Controls
             MarkUnloaded();
         }
 
-        protected override void Update() { }
-
-        protected override void LateUpdate()
+        protected override void Update() 
         {
             RotateCamera();
+            ZoomCamera();
         }
         #endregion
 
@@ -55,15 +54,27 @@ namespace Swap.Rules.Controls
             if (inputRotation == 0)
                 return;
 
-            Vector3 currentRotation = m_CameraTarget.rotation.eulerAngles;
             float targetRotation = inputRotation * m_Descriptor.AngularSpeed * m_Time.DeltaTime;
-
-            float targetPitch = currentRotation.x + targetRotation;
+            float targetPitch = m_CameraTarget.eulerAngles.x + targetRotation;
+            
             if (targetPitch < -180f) targetPitch += 360f;
             if (targetPitch > 180f) targetPitch -= 360f;
             targetPitch = Mathf.Clamp(targetPitch, m_Descriptor.MinDownAngle, m_Descriptor.MaxUpAngle);
 
-            m_CameraTarget.rotation = Quaternion.Euler(targetPitch, currentRotation.y, 0.0f);
+            m_CameraTarget.rotation = Quaternion.Euler(targetPitch, m_CameraTarget.eulerAngles.y, 0.0f);
+        }
+
+        private void ZoomCamera()
+        {
+            float inputZoom = ControllerRule.GetZoomValue();
+            if (inputZoom == 0)
+                return;
+
+            float targetZoom = inputZoom * m_Descriptor.ZoomSpeed * m_Time.DeltaTime;
+            float targetFieldOfView = m_Camera.m_Lens.FieldOfView - targetZoom;
+            targetFieldOfView = Mathf.Clamp(targetFieldOfView, m_Descriptor.MinFieldOfView, m_Descriptor.MaxFieldOfView);
+
+            m_Camera.m_Lens.FieldOfView = targetFieldOfView;
         }
         #endregion
     }

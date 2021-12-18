@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ContentId: 
   AngularSpeed: 40
-  MaxUpAngle: 60
   MinDownAngle: -50
+  MaxUpAngle: 60
+  ZoomSpeed: 8
+  MinFieldOfView: 15
+  MaxFieldOfView: 50
