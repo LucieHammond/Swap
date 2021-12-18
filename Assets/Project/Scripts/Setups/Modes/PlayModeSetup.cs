@@ -5,32 +5,46 @@ using GameEngine.PMR.Process.Transitions;
 using GameEngine.PMR.Rules;
 using GameEngine.PMR.Rules.Scheduling;
 using GameEngine.PMR.Unity.Modules;
+using Swap.Rules.Controls;
+using Swap.Rules.World;
 using System;
 using System.Collections.Generic;
 
-namespace Swap.Setups.Modules
+namespace Swap.Setups.Modes
 {
-    public class LevelModuleSetup : IGameModuleSetup
+    public class PlayModeSetup : IGameModuleSetup
     {
         public string Name => "GameLevel";
 
-        public Type RequiredServiceSetup => typeof(ServiceModuleSetup);
+        public Type RequiredServiceSetup => typeof(ServicesSetup);
 
         public Type RequiredParentSetup => null;
 
         public void SetRules(ref RulesDictionary rules)
         {
-
+            rules.AddRule(new LevelRule());
+            rules.AddRule(new ControllerRule());
+            rules.AddRule(new CharacterRule());
+            rules.AddRule(new CameraRule());
         }
 
         public List<Type> GetInitUnloadOrder()
         {
-            return new List<Type>();
+            return new List<Type>()
+            {
+                typeof(LevelRule),
+                typeof(ControllerRule),
+                typeof(CharacterRule),
+                typeof(CameraRule)
+            };
         }
 
         public List<RuleScheduling> GetUpdateScheduler()
         {
-            return new List<RuleScheduling>();
+            return new List<RuleScheduling>()
+            {
+                new RuleScheduling(typeof(CharacterRule), 1, 0)
+            };
         }
 
         public List<RuleScheduling> GetFixedUpdateScheduler()
@@ -40,7 +54,11 @@ namespace Swap.Setups.Modules
 
         public List<RuleScheduling> GetLateUpdateScheduler()
         {
-            return new List<RuleScheduling>();
+            return new List<RuleScheduling>()
+            {
+                new RuleScheduling(typeof(CameraRule), 1, 0),
+                new RuleScheduling(typeof(ControllerRule), 1, 0)
+            };
         }
 
         public ExceptionPolicy GetExceptionPolicy()
@@ -59,7 +77,7 @@ namespace Swap.Setups.Modules
             return new PerformancePolicy()
             {
                 MaxFrameDuration = 20,
-                CheckStallingRules = true,
+                CheckStallingRules = false,
                 InitStallingTimeout = 200,
                 UpdateStallingTimeout = 40,
                 UnloadStallingTimeout = 150,

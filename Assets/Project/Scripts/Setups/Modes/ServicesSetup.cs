@@ -1,16 +1,20 @@
+using GameEngine.PMR.Basics.Content;
 using GameEngine.PMR.Modules;
 using GameEngine.PMR.Modules.Policies;
 using GameEngine.PMR.Modules.Specialization;
 using GameEngine.PMR.Process.Transitions;
 using GameEngine.PMR.Rules;
 using GameEngine.PMR.Rules.Scheduling;
+using GameEngine.PMR.Unity.Basics.Configuration;
+using GameEngine.PMR.Unity.Basics.Content;
+using GameEngine.PMR.Unity.Basics.Input;
 using GameEngine.PMR.Unity.Modules;
 using System;
 using System.Collections.Generic;
 
-namespace Swap.Setups.Modules
+namespace Swap.Setups.Modes
 {
-    public class ServiceModuleSetup : IGameModuleSetup
+    public class ServicesSetup : IGameModuleSetup
     {
         public string Name => "Services";
 
@@ -20,17 +24,36 @@ namespace Swap.Setups.Modules
 
         public void SetRules(ref RulesDictionary rules)
         {
+            // Configuration
+            rules.AddRule(new ConfigurationService());
 
+            // Content
+            rules.AddRule(new DataContentService());
+            rules.AddRule(new DescriptorContentService());
+            rules.AddRule(new AssetContentService());
+
+            // Input
+            rules.AddRule(new InputService());
         }
 
         public List<Type> GetInitUnloadOrder()
         {
-            return new List<Type>();
+            return new List<Type>()
+            {
+                typeof(ConfigurationService),
+                typeof(DataContentService),
+                typeof(DescriptorContentService),
+                typeof(AssetContentService),
+                typeof(InputService),
+            };
         }
 
         public List<RuleScheduling> GetUpdateScheduler()
         {
-            return new List<RuleScheduling>();
+            return new List<RuleScheduling>()
+            {
+                new RuleScheduling(typeof(InputService), 1, 0)
+            };
         }
 
         public List<RuleScheduling> GetFixedUpdateScheduler()
