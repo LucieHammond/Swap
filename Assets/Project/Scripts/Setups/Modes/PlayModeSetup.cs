@@ -6,6 +6,7 @@ using GameEngine.PMR.Rules;
 using GameEngine.PMR.Rules.Scheduling;
 using GameEngine.PMR.Unity.Modules;
 using Swap.Rules.Controls;
+using Swap.Rules.Skills;
 using Swap.Rules.World;
 using System;
 using System.Collections.Generic;
@@ -23,9 +24,12 @@ namespace Swap.Setups.Modes
         public void SetRules(ref RulesDictionary rules)
         {
             rules.AddRule(new LevelRule());
+
             rules.AddRule(new ControllerRule());
             rules.AddRule(new CharacterRule());
             rules.AddRule(new CameraRule());
+
+            rules.AddRule(new SwapRule());
         }
 
         public List<Type> GetInitUnloadOrder()
@@ -35,7 +39,8 @@ namespace Swap.Setups.Modes
                 typeof(LevelRule),
                 typeof(ControllerRule),
                 typeof(CharacterRule),
-                typeof(CameraRule)
+                typeof(CameraRule),
+                typeof(SwapRule)
             };
         }
 
@@ -45,6 +50,7 @@ namespace Swap.Setups.Modes
             {
                 new RuleScheduling(typeof(CharacterRule), 1, 0),
                 new RuleScheduling(typeof(CameraRule), 1, 0),
+                new RuleScheduling(typeof(SwapRule), 1, 0),
             };
         }
 
