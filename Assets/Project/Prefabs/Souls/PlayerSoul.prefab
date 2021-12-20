@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2865650206161909377}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: CameraLook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,9 +39,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9200242672682986856}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: PlayerSoul
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 1563814588660035915}
   - component: {fileID: 2152596959313664649}
   - component: {fileID: 5630698038551389282}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: soul_player
   m_TagString: Untagged
   m_Icon: {fileID: 0}

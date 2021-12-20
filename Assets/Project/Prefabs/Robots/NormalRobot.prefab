@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1798680824990965405}
   - component: {fileID: 6899993367805054324}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: NormalRobot
-  m_TagString: Untagged
+  m_TagString: RobotBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 4111840849882443971}
   - component: {fileID: 1062826297360777062}
   - component: {fileID: 2980008198749096876}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: robot_normal
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 4138377530691541250}
   - component: {fileID: 1063311192612460199}
   - component: {fileID: 2964869029741470317}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: robot_heavy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,9 +121,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4939413147325185699}
   - component: {fileID: 3262287599393332511}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HeavyRobot
-  m_TagString: Untagged
+  m_TagString: RobotBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
