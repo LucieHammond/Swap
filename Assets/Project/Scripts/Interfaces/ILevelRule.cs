@@ -1,11 +1,16 @@
-﻿using UnityEngine;
+﻿using Swap.Components;
+using UnityEngine;
 
 namespace Swap.Interfaces
 {
     public interface ILevelRule
     {
-        GameObject GetInitialCharacter();
-
         GameObject GetCamera();
+
+        PlayerSoul GetPlayerSoul();
+
+        NonPlayerSoul[] GetNonPlayerSouls();
+
+        RobotBody[] GetRobotBodies();
     }
 }

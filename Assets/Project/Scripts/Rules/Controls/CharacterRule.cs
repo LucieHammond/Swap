@@ -36,9 +36,9 @@ namespace Swap.Rules.Controls
             m_Descriptor = ContentService.GetContentDescriptor<CharacterDescriptor>("Character");
             m_JumpWaitingTime = m_Descriptor.JumpCooldown;
 
-            GameObject initialRobot = LevelRule.GetInitialCharacter();
-            SetCurrentCharacter(initialRobot);
-            m_Soul = initialRobot.transform.Find("SoulRoot/PlayerSoul");
+            Transform m_Soul = LevelRule.GetPlayerSoul().transform;
+            GameObject initialCharacter = m_Soul.parent.parent.gameObject;
+            SetCurrentCharacter(initialCharacter);
 
             MarkInitialized();
         }
