@@ -1,7 +1,7 @@
 ﻿using GameEngine.Core.Unity.System;
 using UnityEngine;
 
-namespace Swap.DataModels.Descriptors
+namespace Swap.Data.Descriptors
 {
     [CreateAssetMenu(fileName = "NewCharacterDescriptor", menuName = "Content/Game/Character Descriptor", order = 120)]
     public class CharacterDescriptor : ContentDescriptor

@@ -1,7 +1,7 @@
 using GameEngine.Core.Unity.System;
 using UnityEngine;
 
-namespace Swap.DataModels.Descriptors
+namespace Swap.Data.Descriptors
 {
     [CreateAssetMenu(fileName = "NewLevelDescriptor", menuName = "Content/Game/Level Descriptor", order = 102)]
     public class LevelDescriptor : ContentDescriptor

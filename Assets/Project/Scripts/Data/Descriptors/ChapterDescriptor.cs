@@ -2,7 +2,7 @@ using GameEngine.Core.Unity.System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Swap.DataModels.Descriptors
+namespace Swap.Data.Descriptors
 {
     [CreateAssetMenu(fileName = "NewChapterDescriptor", menuName = "Content/Game/Chapter Descriptor", order = 101)]
     public class ChapterDescriptor : ContentDescriptor

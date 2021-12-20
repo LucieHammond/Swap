@@ -1,7 +1,7 @@
 using GameEngine.PMR.Rules;
 using GameEngine.PMR.Rules.Dependencies;
 using GameEngine.PMR.Unity.Basics.Content;
-using Swap.DataModels.Descriptors;
+using Swap.Data.Descriptors;
 using Swap.Interfaces;
 using UnityEngine;
 
