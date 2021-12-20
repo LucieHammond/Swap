@@ -7,7 +7,8 @@ using UnityEngine;
 
 namespace Swap.Rules.Controls
 {
-    public class CharacterRule : GameRule
+    [RuleAccess(typeof(ICharacterRule))]
+    public class CharacterRule : GameRule, ICharacterRule
     {
         [RuleDependency(RuleDependencySource.Service, true)]
         public IDescriptorContentService ContentService;
@@ -20,7 +21,6 @@ namespace Swap.Rules.Controls
 
         private CharacterDescriptor m_Descriptor;
 
-        private Transform m_Soul;
         private Transform m_CurrentCharacter;
         private CharacterController m_CharacterController;
 
@@ -34,11 +34,10 @@ namespace Swap.Rules.Controls
         protected override void Initialize()
         {
             m_Descriptor = ContentService.GetContentDescriptor<CharacterDescriptor>("Character");
-            m_JumpWaitingTime = m_Descriptor.JumpCooldown;
 
-            Transform m_Soul = LevelRule.GetPlayerSoul().transform;
-            GameObject initialCharacter = m_Soul.parent.parent.gameObject;
-            SetCurrentCharacter(initialCharacter);
+            Transform playerSoul = LevelRule.GetPlayerSoul().transform;
+            GameObject initialCharacter = playerSoul.parent.parent.gameObject;
+            EnterCharacter(initialCharacter);
 
             MarkInitialized();
         }
@@ -50,24 +49,35 @@ namespace Swap.Rules.Controls
 
         protected override void Update()
         {
-            MoveCharacter();
-            TurnCharacter();
+            if (m_CurrentCharacter != null)
+            {
+                MoveCharacter();
+                TurnCharacter();
+            }
+        }
+        #endregion
+
+        #region ICharacterRule API
+        public void EnterCharacter(GameObject character)
+        {
+            m_CurrentCharacter = character.transform;
+            m_CharacterController = character.GetComponent<CharacterController>();
+
+            m_IsGrounded = false;
+            m_IsOnSlope = false;
+            m_HorizontalVelocity = Vector2.zero;
+            m_VerticalVelocity = 0f;
+            m_JumpWaitingTime = m_Descriptor.JumpCooldown;
+        }
+
+        public void ExitCharacter()
+        {
+            m_CurrentCharacter = null;
+            m_CharacterController = null;
         }
         #endregion
 
         #region private
-        private void SetCurrentCharacter(GameObject character)
-        {
-            if (m_CurrentCharacter != null)
-            {
-                m_CurrentCharacter.gameObject.layer = LayerMask.NameToLayer("Default");
-            } 
-
-            m_CurrentCharacter = character.transform;
-            m_CharacterController = character.GetComponent<CharacterController>();
-            m_CurrentCharacter.gameObject.layer = LayerMask.NameToLayer("Player");
-        }
-
         private void MoveCharacter()
         {
             m_IsGrounded = CheckIfGrounded();
@@ -126,7 +136,7 @@ namespace Swap.Rules.Controls
             Vector3 targetDirection = m_CurrentCharacter.rotation * new Vector3(inputMove.x, 0.0f, inputMove.y).normalized;
             float targetSpeed = isStopped ? 0.0f : isRunning ? m_Descriptor.RunSpeed : m_Descriptor.WalkSpeed;
             float currentSpeed = m_HorizontalVelocity.magnitude;
-            
+
             float actualSpeed;
             if (currentSpeed < targetSpeed - m_Descriptor.TargetSpeedDelta || currentSpeed > targetSpeed + m_Descriptor.TargetSpeedDelta)
                 actualSpeed = Mathf.Lerp(currentSpeed, targetSpeed, m_Time.DeltaTime * m_Descriptor.SpeedChangeRate);
