@@ -105,6 +105,11 @@ namespace Swap.Rules.Controls
         {
             return m_TriggerPause;
         }
+
+        public void ResetInteraction()
+        {
+            m_TriggerInteract = false;
+        }
         #endregion
 
         #region private

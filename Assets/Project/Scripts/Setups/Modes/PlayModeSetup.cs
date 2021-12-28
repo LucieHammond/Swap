@@ -6,7 +6,7 @@ using GameEngine.PMR.Rules;
 using GameEngine.PMR.Rules.Scheduling;
 using GameEngine.PMR.Unity.Modules;
 using Swap.Rules.Controls;
-using Swap.Rules.Skills;
+using Swap.Rules.Mechanics;
 using Swap.Rules.World;
 using System;
 using System.Collections.Generic;
@@ -30,6 +30,7 @@ namespace Swap.Setups.Modes
             rules.AddRule(new CameraRule());
 
             rules.AddRule(new SwapRule());
+            rules.AddRule(new GemPickupRule());
         }
 
         public List<Type> GetInitUnloadOrder()
@@ -40,7 +41,8 @@ namespace Swap.Setups.Modes
                 typeof(ControllerRule),
                 typeof(CharacterRule),
                 typeof(CameraRule),
-                typeof(SwapRule)
+                typeof(SwapRule),
+                typeof(GemPickupRule)
             };
         }
 
@@ -51,6 +53,7 @@ namespace Swap.Setups.Modes
                 new RuleScheduling(typeof(CharacterRule), 1, 0),
                 new RuleScheduling(typeof(CameraRule), 1, 0),
                 new RuleScheduling(typeof(SwapRule), 1, 0),
+                new RuleScheduling(typeof(GemPickupRule), 1, 0)
             };
         }
 
