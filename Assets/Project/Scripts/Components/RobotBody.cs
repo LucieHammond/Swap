@@ -6,5 +6,9 @@ namespace Swap.Components
     public class RobotBody : MonoBehaviour
     {
         public RobotType RobotType;
+
+        public Transform SoolRoot;
+
+        public Transform ObjectRoot;
     }
 }
