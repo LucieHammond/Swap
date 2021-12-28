@@ -35,8 +35,7 @@ namespace Swap.Rules.Controls
         {
             m_Descriptor = ContentService.GetContentDescriptor<CharacterDescriptor>("Character");
 
-            Transform playerSoul = LevelRule.GetPlayerSoul().transform;
-            GameObject initialCharacter = playerSoul.parent.parent.gameObject;
+            GameObject initialCharacter = LevelRule.GetLevelState().CurrentRobotBody.gameObject;
             EnterCharacter(initialCharacter);
 
             MarkInitialized();
