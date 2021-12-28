@@ -8,7 +8,7 @@ using Swap.Interfaces;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Swap.Rules.Skills
+namespace Swap.Rules.Mechanics
 {
     public class SwapRule : GameRule, ISceneGameRule
     {
@@ -41,10 +41,10 @@ namespace Swap.Rules.Skills
 
         private Vector2 m_ScreenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
 
-        #region GameRule API
+        #region GameRule cycle
         protected override void Initialize()
         {
-            m_Descriptor = ContentService.GetContentDescriptor<SwapDescriptor>("SwapSkill");
+            m_Descriptor = ContentService.GetContentDescriptor<SwapDescriptor>("Swap");
 
             m_Camera = Camera.main;
             m_PlayerSoul = LevelRule.GetPlayerSoul();
@@ -149,9 +149,8 @@ namespace Swap.Rules.Skills
             m_PlayerSoul.transform.position = m_SwapStart.position + playerBaseMove + playerDeviationMove;
 
             // Rotate player character
-            Vector3 arrivalRotation = m_SwapArrival.parent.eulerAngles;
-            float newArrivalAngle = Mathf.LerpAngle(arrivalRotation.y, m_PlayerSoul.transform.eulerAngles.y, m_SwapProgression);
-            m_SwapArrival.parent.rotation = Quaternion.Euler(arrivalRotation.x, newArrivalAngle, 0.0f);
+            float newArrivalAngle = Mathf.LerpAngle(m_PartnerSoul.transform.eulerAngles.y, m_PlayerSoul.transform.eulerAngles.y, m_SwapProgression);
+            m_SwapArrival.parent.rotation = Quaternion.Euler(m_SwapArrival.parent.eulerAngles.x, newArrivalAngle, 0.0f);
 
             // Move partner
             Vector3 partnerBaseMove = -swapBaseLine * m_SwapProgression;
@@ -159,9 +158,8 @@ namespace Swap.Rules.Skills
             m_PartnerSoul.transform.position = m_SwapArrival.position + partnerBaseMove + partnerDeviationMove;
 
             // Rotate partner character
-            Vector3 startRotation = m_SwapArrival.parent.eulerAngles;
-            float newStartAngle = Mathf.LerpAngle(startRotation.y, m_PartnerSoul.transform.eulerAngles.y, m_SwapProgression);
-            m_SwapStart.parent.rotation = Quaternion.Euler(startRotation.x, newStartAngle, 0.0f);
+            float newStartAngle = Mathf.LerpAngle(m_PlayerSoul.transform.eulerAngles.y, m_PartnerSoul.transform.eulerAngles.y, m_SwapProgression);
+            m_SwapStart.parent.rotation = Quaternion.Euler(m_SwapArrival.parent.eulerAngles.x, newStartAngle, 0.0f);
 
             return m_SwapProgression == 1;
         }
