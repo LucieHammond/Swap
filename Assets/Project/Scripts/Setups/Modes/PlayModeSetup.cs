@@ -24,6 +24,7 @@ namespace Swap.Setups.Modes
         public void SetRules(ref RulesDictionary rules)
         {
             rules.AddRule(new LevelRule());
+            rules.AddRule(new LogicRule());
 
             rules.AddRule(new ControllerRule());
             rules.AddRule(new CharacterRule());
@@ -33,6 +34,8 @@ namespace Swap.Setups.Modes
             rules.AddRule(new ButtonPressRule());
             rules.AddRule(new GemPickupRule());
             rules.AddRule(new GemReceptionRule());
+
+            rules.AddRule(new DoorOpeningRule());
         }
 
         public List<Type> GetInitUnloadOrder()
@@ -40,13 +43,15 @@ namespace Swap.Setups.Modes
             return new List<Type>()
             {
                 typeof(LevelRule),
+                typeof(LogicRule),
                 typeof(ControllerRule),
                 typeof(CharacterRule),
                 typeof(CameraRule),
                 typeof(SwapRule),
                 typeof(ButtonPressRule),
                 typeof(GemPickupRule),
-                typeof(GemReceptionRule)
+                typeof(GemReceptionRule),
+                typeof(DoorOpeningRule)
             };
         }
 
@@ -56,10 +61,13 @@ namespace Swap.Setups.Modes
             {
                 new RuleScheduling(typeof(CharacterRule), 1, 0),
                 new RuleScheduling(typeof(CameraRule), 1, 0),
+                
                 new RuleScheduling(typeof(SwapRule), 1, 0),
                 new RuleScheduling(typeof(ButtonPressRule), 1, 0),
                 new RuleScheduling(typeof(GemPickupRule), 1, 0),
-                new RuleScheduling(typeof(GemReceptionRule), 1, 0)
+                new RuleScheduling(typeof(GemReceptionRule), 1, 0),
+
+                new RuleScheduling(typeof(DoorOpeningRule), 1, 0)
             };
         }
 
@@ -72,6 +80,7 @@ namespace Swap.Setups.Modes
         {
             return new List<RuleScheduling>()
             {
+                new RuleScheduling(typeof(LogicRule), 1, 0),
                 new RuleScheduling(typeof(ControllerRule), 1, 0)
             };
         }

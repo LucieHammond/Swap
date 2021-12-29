@@ -23,5 +23,7 @@ namespace Swap.Interfaces
         GemStone[] GetGemStones();
 
         GemReceptacle[] GetGemReceptacles();
+
+        Door[] GetDoors();
     }
 }

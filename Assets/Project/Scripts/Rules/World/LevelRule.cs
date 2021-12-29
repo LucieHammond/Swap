@@ -24,6 +24,7 @@ namespace Swap.Rules.World
         private const string BUTTON_TAG = "Button";
         private const string GEM_STONE_TAG = "GemStone";
         private const string GEM_RECEPTACLE_TAG = "GemReceptacle";
+        private const string DOOR_TAG = "Door";
 
         public HashSet<string> RequiredScenes => new HashSet<string>() { "Level_1.1" };
 
@@ -45,6 +46,7 @@ namespace Swap.Rules.World
         private Button[] m_Buttons;
         private GemStone[] m_GemStones;
         private GemReceptacle[] m_GemReceptacles;
+        private Door[] m_Doors;
 
         private LevelState m_CurrentState;
 
@@ -69,7 +71,10 @@ namespace Swap.Rules.World
             m_GemReceptacles = GameObject.FindGameObjectsWithTag(GEM_RECEPTACLE_TAG)
                 .Select((gameObject) => gameObject.GetComponent<GemReceptacle>()).ToArray();
 
-            
+            m_Doors = GameObject.FindGameObjectsWithTag(DOOR_TAG)
+                .Select((gameObject) => gameObject.GetComponent<Door>()).ToArray();
+
+
             m_CurrentState = new LevelState()
             {
                 CurrentRobotBody = m_PlayerSoul.GetComponentInParent<RobotBody>()
@@ -112,6 +117,8 @@ namespace Swap.Rules.World
         public GemStone[] GetGemStones() => m_GemStones;
 
         public GemReceptacle[] GetGemReceptacles() => m_GemReceptacles;
+
+        public Door[] GetDoors() => m_Doors;
         #endregion
     }
 }
