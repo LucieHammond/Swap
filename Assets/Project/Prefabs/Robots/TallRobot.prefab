@@ -31,6 +31,7 @@ Transform:
   m_Children:
   - {fileID: 7419638683095590732}
   - {fileID: 3995347230033924727}
+  - {fileID: 1579726706683161874}
   - {fileID: 7550634302185069035}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -49,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RobotType: 2
   SoolRoot: {fileID: 3995347230033924727}
+  InteractRoot: {fileID: 1579726706683161874}
   ObjectRoot: {fileID: 7550634302185069035}
 --- !u!143 &1812433482163121073
 CharacterController:
@@ -93,6 +95,36 @@ Transform:
   m_GameObject: {fileID: 4280499971022828763}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.35, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3623777902977099813}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5872496904486012715
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1579726706683161874}
+  m_Layer: 2
+  m_Name: InteractRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1579726706683161874
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5872496904486012715}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.95, z: 0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3623777902977099813}

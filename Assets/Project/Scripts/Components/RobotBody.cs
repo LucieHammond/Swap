@@ -9,6 +9,8 @@ namespace Swap.Components
 
         public Transform SoolRoot;
 
+        public Transform InteractRoot;
+
         public Transform ObjectRoot;
     }
 }
