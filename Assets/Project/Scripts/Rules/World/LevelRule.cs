@@ -21,6 +21,7 @@ namespace Swap.Rules.World
         private const string PLAYER_TAG = "Player";
         private const string NON_PLAYER_TAG = "NonPlayerSoul";
         private const string ROBOT_BODY_TAG = "RobotBody";
+        private const string BUTTON_TAG = "Button";
         private const string GEM_STONE_TAG = "GemStone";
         private const string GEM_RECEPTACLE_TAG = "GemReceptacle";
 
@@ -41,6 +42,7 @@ namespace Swap.Rules.World
         private PlayerSoul m_PlayerSoul;
         private NonPlayerSoul[] m_NonPlayerSouls;
         private RobotBody[] m_Robots;
+        private Button[] m_Buttons;
         private GemStone[] m_GemStones;
         private GemReceptacle[] m_GemReceptacles;
 
@@ -57,6 +59,9 @@ namespace Swap.Rules.World
             
             m_Robots = GameObject.FindGameObjectsWithTag(ROBOT_BODY_TAG)
                 .Select((gameObject) => gameObject.GetComponent<RobotBody>()).ToArray();
+
+            m_Buttons = GameObject.FindGameObjectsWithTag(BUTTON_TAG)
+                .Select((gameObject) => gameObject.GetComponent<Button>()).ToArray();
 
             m_GemStones = GameObject.FindGameObjectsWithTag(GEM_STONE_TAG)
                 .Select((gameObject) => gameObject.GetComponent<GemStone>()).ToArray();
@@ -101,6 +106,8 @@ namespace Swap.Rules.World
         public NonPlayerSoul[] GetNonPlayerSouls() => m_NonPlayerSouls;
 
         public RobotBody[] GetRobotBodies() => m_Robots;
+
+        public Button[] GetButtons() => m_Buttons;
 
         public GemStone[] GetGemStones() => m_GemStones;
 

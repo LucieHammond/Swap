@@ -18,6 +18,8 @@ namespace Swap.Interfaces
 
         RobotBody[] GetRobotBodies();
 
+        Button[] GetButtons();
+
         GemStone[] GetGemStones();
 
         GemReceptacle[] GetGemReceptacles();
