@@ -19,6 +19,9 @@ namespace Swap.Rules.Mechanics
         public ILevelRule LevelRule;
 
         [RuleDependency(RuleDependencySource.SameModule, true)]
+        public ILogicRule LogicRule;
+
+        [RuleDependency(RuleDependencySource.SameModule, true)]
         public IControllerRule ControllerRule;
 
         private PressDescriptor m_Descriptor;
@@ -101,7 +104,7 @@ namespace Swap.Rules.Mechanics
 
         private void TriggerButton(int buttonIndex)
         {
-            m_Buttons[buttonIndex].Animator.SetTrigger("PressButton");
+            m_Buttons[buttonIndex].Animator.SetTrigger("Press");
             m_Triggers[buttonIndex] = m_Descriptor.ActivationDelay;
         }
 
@@ -115,7 +118,7 @@ namespace Swap.Rules.Mechanics
                     
                     if (m_Triggers[i] < 0)
                     {
-                        Debug.Log($"Signal {m_Buttons[i].SignalToSend}: Send trigger");
+                        LogicRule.TriggerInstantSignal(m_Buttons[i].SignalToSend);
                     }
                 }
             }

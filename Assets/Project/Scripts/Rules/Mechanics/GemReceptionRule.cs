@@ -26,6 +26,9 @@ namespace Swap.Rules.Mechanics
         [RuleDependency(RuleDependencySource.SameModule, true)]
         public ILevelRule LevelRule;
 
+        [RuleDependency(RuleDependencySource.SameModule, true)]
+        public ILogicRule LogicRule;
+
         private ReceptionDescriptor m_Descriptor;
 
         private GemStone[] m_GemStones;
@@ -180,12 +183,12 @@ namespace Swap.Rules.Mechanics
                 if (activated && !m_Activations[i])
                 {
                     m_Activations[i] = true;
-                    Debug.Log($"Signal {m_GemReceptacles[i].SignalToSend}: Send value = True");
+                    LogicRule.UpdateStatusSignal(m_GemReceptacles[i].SignalToSend, true);
                 }
                 else if (!activated && m_Activations[i])
                 {
                     m_Activations[i] = false;
-                    Debug.Log($"Signal {m_GemReceptacles[i].SignalToSend}: Send value = False");
+                    LogicRule.UpdateStatusSignal(m_GemReceptacles[i].SignalToSend, false);
                 }
             }
         }
