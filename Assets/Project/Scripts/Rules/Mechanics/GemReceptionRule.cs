@@ -26,9 +26,6 @@ namespace Swap.Rules.Mechanics
         [RuleDependency(RuleDependencySource.SameModule, true)]
         public ILevelRule LevelRule;
 
-        [RuleDependency(RuleDependencySource.SameModule, true)]
-        public IControllerRule ControllerRule;
-
         private ReceptionDescriptor m_Descriptor;
 
         private GemStone[] m_GemStones;
