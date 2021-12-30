@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b291b96457a3714caa82b01694580fa, type: 3}
-  m_Name: Level_1.1
+  m_Script: {fileID: 11500000, guid: 981c9fa36ad13de44a4910b0c0d0b927, type: 3}
+  m_Name: Victory
   m_EditorClassIdentifier: 
   ContentId: 
-  Name: Test Level
-  Scene: Level_1.1
-  EndPoint: {x: -6, y: 1.5, z: 30}
+  AttractionRadius: 4
+  AttractionDeviation: 0.1
+  AttractionTime: 0.8
+  VictoryRadius: 1
+  DisplayTime: 1

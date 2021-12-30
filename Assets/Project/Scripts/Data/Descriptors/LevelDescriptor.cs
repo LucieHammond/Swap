@@ -9,6 +9,8 @@ namespace Swap.Data.Descriptors
         public string Name;
 
         public string Scene;
+
+        public Vector3 EndPoint;
     }
 }
 
