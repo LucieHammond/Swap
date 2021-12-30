@@ -54,6 +54,8 @@ namespace Swap.Rules.Mechanics
 
         protected override void Unload()
         {
+            m_Triggers.Clear();
+
             MarkUnloaded();
         }
 

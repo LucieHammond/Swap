@@ -30,6 +30,7 @@ namespace Swap.Rules.World
 
         protected override void Unload()
         {
+            m_SignalValues.Clear();
             m_InstantSignals.Clear();
             m_StatusSignals.Clear();
             m_PermanentSignals.Clear();

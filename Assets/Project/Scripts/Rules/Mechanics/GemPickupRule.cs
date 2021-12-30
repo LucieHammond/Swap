@@ -40,6 +40,8 @@ namespace Swap.Rules.Mechanics
             m_LevelState = LevelRule.GetLevelState();
             m_GemStones = LevelRule.GetGemStones();
             m_GemsRoot = LevelRule.GetRootTransform("Objects");
+            m_IsRetrievingGem = false;
+            m_IsReleasingGem = false;
 
             MarkInitialized();
         }

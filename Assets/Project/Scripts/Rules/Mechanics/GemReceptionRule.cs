@@ -67,6 +67,10 @@ namespace Swap.Rules.Mechanics
 
         protected override void Unload()
         {
+            m_CurrentConnections.Clear();
+            m_CurrentStates.Clear();
+            m_Activations.Clear();
+
             MarkUnloaded();
         }
 
