@@ -31,12 +31,15 @@ namespace Swap.Rules.Controls
 
             m_Camera = LevelRule.GetCamera().GetComponent<CinemachineVirtualCamera>();
             m_CameraTarget = m_Camera.Follow.parent;
+            m_Camera.enabled = true;
 
             MarkInitialized();
         }
 
         protected override void Unload()
         {
+            m_Camera.enabled = false;
+
             MarkUnloaded();
         }
 

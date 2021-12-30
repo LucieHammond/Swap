@@ -15,7 +15,7 @@ namespace Swap.Setups.Modes
 {
     public class PlayModeSetup : IGameModuleSetup
     {
-        public string Name => "GameLevel";
+        public string Name => "PlayMode";
 
         public Type RequiredServiceSetup => typeof(ServicesSetup);
 
@@ -25,6 +25,9 @@ namespace Swap.Setups.Modes
         {
             rules.AddRule(new LevelRule());
             rules.AddRule(new LogicRule());
+            rules.AddRule(new StartRule());
+            rules.AddRule(new DefeatRule());
+            rules.AddRule(new VictoryRule());
 
             rules.AddRule(new ControllerRule());
             rules.AddRule(new CharacterRule());
@@ -42,16 +45,20 @@ namespace Swap.Setups.Modes
         {
             return new List<Type>()
             {
+                typeof(StartRule),
                 typeof(LevelRule),
                 typeof(LogicRule),
+                typeof(DefeatRule),
+                typeof(VictoryRule),
                 typeof(ControllerRule),
                 typeof(CharacterRule),
-                typeof(CameraRule),
                 typeof(SwapRule),
                 typeof(ButtonPressRule),
                 typeof(GemPickupRule),
                 typeof(GemReceptionRule),
-                typeof(DoorOpeningRule)
+                typeof(DoorOpeningRule),
+
+                typeof(CameraRule)
             };
         }
 
@@ -67,7 +74,11 @@ namespace Swap.Setups.Modes
                 new RuleScheduling(typeof(GemPickupRule), 1, 0),
                 new RuleScheduling(typeof(GemReceptionRule), 1, 0),
 
-                new RuleScheduling(typeof(DoorOpeningRule), 1, 0)
+                new RuleScheduling(typeof(DoorOpeningRule), 1, 0),
+
+                new RuleScheduling(typeof(StartRule), 1, 0),
+                new RuleScheduling(typeof(DefeatRule), 1, 0),
+                new RuleScheduling(typeof(VictoryRule), 1, 0)
             };
         }
 
