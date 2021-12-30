@@ -1,8 +1,10 @@
+using GameEngine.Core.System;
 using GameEngine.PMR.Rules;
 using GameEngine.PMR.Rules.Dependencies;
 using GameEngine.PMR.Unity.Rules;
 using GameEngine.PMR.Unity.Rules.Dependencies;
 using Swap.Components;
+using Swap.Data.Descriptors;
 using Swap.Data.Models;
 using Swap.Interfaces;
 using System.Collections.Generic;
@@ -26,7 +28,14 @@ namespace Swap.Rules.World
         private const string GEM_RECEPTACLE_TAG = "GemReceptacle";
         private const string DOOR_TAG = "Door";
 
-        public HashSet<string> RequiredScenes => new HashSet<string>() { "Level_1.1" };
+        public HashSet<string> RequiredScenes
+        {
+            get
+            {
+                Configuration config = m_Process.CurrentGameMode.Configuration;
+                return new HashSet<string> { config.Get<LevelDescriptor>("level").Scene };
+            }
+        }
 
         [ObjectDependency(LIGHTS_ROOT, ObjectDependencyElement.Transform, false)]
         public Transform m_LightsRoot;

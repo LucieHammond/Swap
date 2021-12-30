@@ -9,6 +9,7 @@ using GameEngine.PMR.Unity.Basics.Configuration;
 using GameEngine.PMR.Unity.Basics.Content;
 using GameEngine.PMR.Unity.Basics.Input;
 using GameEngine.PMR.Unity.Modules;
+using Swap.Rules.Services;
 using System;
 using System.Collections.Generic;
 
@@ -34,6 +35,9 @@ namespace Swap.Setups.Modes
 
             // Input
             rules.AddRule(new InputService());
+
+            // Progression
+            rules.AddRule(new ProgressionService());
         }
 
         public List<Type> GetInitUnloadOrder()
@@ -45,6 +49,7 @@ namespace Swap.Setups.Modes
                 typeof(DescriptorContentService),
                 typeof(AssetContentService),
                 typeof(InputService),
+                typeof(ProgressionService)
             };
         }
 
