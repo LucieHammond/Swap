@@ -25,5 +25,7 @@ namespace Swap.Interfaces
         GemReceptacle[] GetGemReceptacles();
 
         Door[] GetDoors();
+
+        MobilePlatform[] GetMobilePlatforms();
     }
 }
