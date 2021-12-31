@@ -39,6 +39,7 @@ namespace Swap.Setups.Modes
             rules.AddRule(new GemReceptionRule());
 
             rules.AddRule(new DoorOpeningRule());
+            rules.AddRule(new PlatformMoveRule());
         }
 
         public List<Type> GetInitUnloadOrder()
@@ -57,6 +58,7 @@ namespace Swap.Setups.Modes
                 typeof(GemPickupRule),
                 typeof(GemReceptionRule),
                 typeof(DoorOpeningRule),
+                typeof(PlatformMoveRule),
 
                 typeof(CameraRule)
             };
@@ -75,6 +77,7 @@ namespace Swap.Setups.Modes
                 new RuleScheduling(typeof(GemReceptionRule), 1, 0),
 
                 new RuleScheduling(typeof(DoorOpeningRule), 1, 0),
+                new RuleScheduling(typeof(PlatformMoveRule), 1, 0),
 
                 new RuleScheduling(typeof(StartRule), 1, 0),
                 new RuleScheduling(typeof(DefeatRule), 1, 0),
