@@ -216,7 +216,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1224239085}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &101303424
 GameObject:
@@ -661,12 +661,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 880770511}
+  - component: {fileID: 880770512}
   - component: {fileID: 880770510}
   - component: {fileID: 880770509}
   - component: {fileID: 880770508}
   m_Layer: 0
-  m_Name: Slope 2
-  m_TagString: Untagged
+  m_Name: Slope 2 - Switch
+  m_TagString: MobilePlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -741,12 +742,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 880770507}
   m_LocalRotation: {x: -0.258819, y: -0, z: -0, w: 0.9659259}
-  m_LocalPosition: {x: -4, y: 0.15, z: 0}
+  m_LocalPosition: {x: -4, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 0.20000005, z: 3}
   m_Children: []
   m_Father: {fileID: 1224239085}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -30, y: 0, z: 0}
+--- !u!114 &880770512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880770507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ea4c8f71f4b99439bee63760c7ca3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActivationType: 0
+  SignalsToListen: 00000000
+  TranslationalMotion: {x: 0, y: 0, z: 0}
+  RotationalMotion: {x: 60, y: 0, z: 0}
+  MovementDuration: 3
 --- !u!1001 &1064118638
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1073,7 +1091,7 @@ Transform:
   m_LocalScale: {x: 20, y: 0.5, z: 20}
   m_Children: []
   m_Father: {fileID: 1224239085}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1224239084
 GameObject:
@@ -1102,12 +1120,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1200822345}
   - {fileID: 1738517517}
+  - {fileID: 880770511}
+  - {fileID: 1200822345}
   - {fileID: 1561526149}
   - {fileID: 23478197}
   - {fileID: 1471412042}
-  - {fileID: 880770511}
   - {fileID: 1867278150}
   - {fileID: 1926839579}
   - {fileID: 1916930543}
@@ -1421,7 +1439,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.2, z: 3}
   m_Children: []
   m_Father: {fileID: 1224239085}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -15, y: 0, z: 0}
 --- !u!1 &1523798690
 GameObject:
@@ -1609,7 +1627,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1224239085}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1631598395
 GameObject:
@@ -1715,12 +1733,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1738517517}
+  - component: {fileID: 1738517518}
   - component: {fileID: 1738517516}
   - component: {fileID: 1738517515}
   - component: {fileID: 1738517514}
   m_Layer: 0
-  m_Name: Stair 1
-  m_TagString: Untagged
+  m_Name: Stair 1 - Elevator
+  m_TagString: MobilePlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1795,12 +1814,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1738517513}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6, y: -0.4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 6, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 0.2, z: 2}
   m_Children: []
   m_Father: {fileID: 1224239085}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1738517518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738517513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ea4c8f71f4b99439bee63760c7ca3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActivationType: 1
+  SignalsToListen: 00000000
+  TranslationalMotion: {x: 0, y: 4, z: 0}
+  RotationalMotion: {x: 0, y: 0, z: 0}
+  MovementDuration: 5
 --- !u!1001 &1793660478
 PrefabInstance:
   m_ObjectHideFlags: 0
