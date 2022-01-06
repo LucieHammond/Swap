@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 4939413147325185699}
   - component: {fileID: 1055693498946346076}
   - component: {fileID: 3262287599393332511}
-  m_Layer: 2
+  m_Layer: 8
   m_Name: HeavyRobot
   m_TagString: RobotBody
   m_Icon: {fileID: 0}
@@ -208,6 +208,7 @@ MonoBehaviour:
   SoolRoot: {fileID: 4734479446791767281}
   InteractRoot: {fileID: 6807351424247503280}
   ObjectRoot: {fileID: 8573332801568380628}
+  Controller: {fileID: 3262287599393332511}
 --- !u!143 &3262287599393332511
 CharacterController:
   m_ObjectHideFlags: 0

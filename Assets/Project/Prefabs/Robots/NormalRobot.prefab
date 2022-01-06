@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 1798680824990965405}
   - component: {fileID: -8973678765026330267}
   - component: {fileID: 6899993367805054324}
-  m_Layer: 2
+  m_Layer: 8
   m_Name: NormalRobot
   m_TagString: RobotBody
   m_Icon: {fileID: 0}
@@ -82,6 +82,7 @@ MonoBehaviour:
   SoolRoot: {fileID: 2147758803447964879}
   InteractRoot: {fileID: 491044180386955280}
   ObjectRoot: {fileID: 555639279138093660}
+  Controller: {fileID: 6899993367805054324}
 --- !u!143 &6899993367805054324
 CharacterController:
   m_ObjectHideFlags: 0

@@ -12,5 +12,7 @@ namespace Swap.Components
         public Transform InteractRoot;
 
         public Transform ObjectRoot;
+
+        public CharacterController Controller;
     }
 }

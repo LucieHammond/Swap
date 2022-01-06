@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3623777902977099813}
   - component: {fileID: -277369278946494871}
   - component: {fileID: 1812433482163121073}
-  m_Layer: 2
+  m_Layer: 8
   m_Name: TallRobot
   m_TagString: RobotBody
   m_Icon: {fileID: 0}
@@ -52,6 +52,7 @@ MonoBehaviour:
   SoolRoot: {fileID: 3995347230033924727}
   InteractRoot: {fileID: 1579726706683161874}
   ObjectRoot: {fileID: 7550634302185069035}
+  Controller: {fileID: 1812433482163121073}
 --- !u!143 &1812433482163121073
 CharacterController:
   m_ObjectHideFlags: 0

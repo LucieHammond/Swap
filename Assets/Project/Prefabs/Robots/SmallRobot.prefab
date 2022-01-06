@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 3586993378758692680}
   - component: {fileID: -8281880347100749388}
   - component: {fileID: 8293035710758372600}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: SmallRobot
   m_TagString: RobotBody
   m_Icon: {fileID: 0}
@@ -112,6 +112,7 @@ MonoBehaviour:
   SoolRoot: {fileID: 3819020149412361498}
   InteractRoot: {fileID: 7286689175119667470}
   ObjectRoot: {fileID: 871525780456201817}
+  Controller: {fileID: 8293035710758372600}
 --- !u!143 &8293035710758372600
 CharacterController:
   m_ObjectHideFlags: 0
