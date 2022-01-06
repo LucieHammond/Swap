@@ -29,9 +29,7 @@ namespace Swap.Setups.Modes
             rules.AddRule(new ConfigurationService());
 
             // Content
-            rules.AddRule(new DataContentService());
             rules.AddRule(new DescriptorContentService());
-            rules.AddRule(new AssetContentService());
 
             // Input
             rules.AddRule(new InputService());
@@ -87,7 +85,7 @@ namespace Swap.Setups.Modes
             return new PerformancePolicy()
             {
                 MaxFrameDuration = 20,
-                CheckStallingRules = true,
+                CheckStallingRules = false,
                 InitStallingTimeout = 200,
                 UpdateStallingTimeout = 40,
                 UnloadStallingTimeout = 150,

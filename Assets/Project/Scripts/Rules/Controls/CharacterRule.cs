@@ -1,6 +1,7 @@
 using GameEngine.PMR.Rules;
 using GameEngine.PMR.Rules.Dependencies;
 using GameEngine.PMR.Unity.Basics.Content;
+using Swap.Components;
 using Swap.Data.Descriptors;
 using Swap.Interfaces;
 using UnityEngine;
@@ -23,6 +24,7 @@ namespace Swap.Rules.Controls
 
         private Transform m_CurrentCharacter;
         private CharacterController m_CharacterController;
+        private RobotBody[] m_AllRobots;
 
         private bool m_IsGrounded = false;
         private bool m_IsOnSlope = false;
@@ -35,6 +37,7 @@ namespace Swap.Rules.Controls
         {
             m_Descriptor = ContentService.GetContentDescriptor<CharacterDescriptor>("Character");
 
+            m_AllRobots = LevelRule.GetRobotBodies();
             GameObject initialCharacter = LevelRule.GetLevelState().CurrentRobotBody.gameObject;
             EnterCharacter(initialCharacter);
 
@@ -52,6 +55,15 @@ namespace Swap.Rules.Controls
             {
                 MoveCharacter();
                 TurnCharacter();
+            }
+
+            for (int i = 0; i < m_AllRobots.Length; i++)
+            {
+                CharacterController controller = m_AllRobots[i].Controller;
+                if (controller != m_CharacterController)
+                {
+                    controller.Move(-2f * m_Time.DeltaTime * Vector3.up);
+                }
             }
         }
         #endregion
@@ -96,7 +108,7 @@ namespace Swap.Rules.Controls
                 return;
 
             Vector3 currentRotation = m_CurrentCharacter.eulerAngles;
-            float targetRotation = inputTurn * m_Descriptor.RotationSpeed * m_Time.DeltaTime;
+            float targetRotation = inputTurn * m_Descriptor.RotationSpeed;
             if (Mathf.Abs(targetRotation) > m_Descriptor.RotationThreshold)
             {
                 float targetYaw = currentRotation.y + targetRotation;

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Camera
   m_EditorClassIdentifier: 
   ContentId: 
-  AngularSpeed: 40
+  AngularSpeed: 17.5
   MinDownAngle: -50
   MaxUpAngle: 60
   ZoomSpeed: 8

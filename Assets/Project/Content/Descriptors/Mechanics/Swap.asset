@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Swap
   m_EditorClassIdentifier: 
   ContentId: 
-  TargetRadius: 30
-  SwapSpeed: 12
-  PlayerDeviation: 1
-  PartnerDeviation: 0.75
+  VisibleLayers:
+    serializedVersion: 2
+    m_Bits: 1217
+  TargetRadius: 0.035
+  TargetOffset: {x: 0, y: 0.05, z: 0}
+  SwapSpeed: 10
+  PlayerDeviation: 0.75
+  PartnerDeviation: 0.5

@@ -57,7 +57,7 @@ namespace Swap.Rules.Controls
             if (inputRotation == 0)
                 return;
 
-            float targetRotation = inputRotation * m_Descriptor.AngularSpeed * m_Time.DeltaTime;
+            float targetRotation = inputRotation * m_Descriptor.AngularSpeed;
             float targetPitch = m_CameraTarget.eulerAngles.x + targetRotation;
             
             if (targetPitch < -180f) targetPitch += 360f;

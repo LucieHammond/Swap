@@ -19,9 +19,9 @@ MonoBehaviour:
   TargetSpeedDelta: 0.1
   ActivateTurn: 0
   TurningTime: 0.16
-  RotationSpeed: 40
+  RotationSpeed: 17.5
   RotationThreshold: 0.01
-  JumpHeight: 0.92
+  JumpHeight: 0.78
   JumpCooldown: 0.05
   FallGravity: -12
   MaxFallSpeed: 50

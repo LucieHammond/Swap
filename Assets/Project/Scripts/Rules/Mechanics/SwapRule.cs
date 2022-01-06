@@ -92,15 +92,15 @@ namespace Swap.Rules.Mechanics
 
             for (int i = 0; i < m_NonPlayerSouls.Length; i++)
             {
-                Vector3 worldPosition = m_NonPlayerSouls[i].transform.position;
+                Vector3 worldPosition = m_NonPlayerSouls[i].transform.position + m_Descriptor.TargetOffset;
                 Vector2 screenPoint = m_Camera.WorldToScreenPoint(worldPosition);
 
-                float offsetToCenter = Vector2.Distance(screenPoint, m_ScreenCenter);
+                float offsetToCenter = Vector2.Distance(screenPoint, m_ScreenCenter) / Screen.width;
                 if (offsetToCenter > m_Descriptor.TargetRadius)
                     continue;
 
                 float distanceToCamera = Vector3.Distance(m_Camera.transform.position, worldPosition);
-                Physics.Raycast(m_Camera.ScreenPointToRay(screenPoint), out RaycastHit hit, distanceToCamera);
+                Physics.Raycast(m_Camera.ScreenPointToRay(screenPoint), out RaycastHit hit, distanceToCamera, m_Descriptor.VisibleLayers);
                 if (hit.collider == null || hit.collider.gameObject != m_NonPlayerSouls[i].gameObject)
                     continue;
 

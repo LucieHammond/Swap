@@ -11,7 +11,8 @@
                     "id": "09aa8e9f-4a2c-4e57-b27f-2ee607c9e668",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Look",
@@ -19,7 +20,8 @@
                     "id": "bdfdbe27-0c1f-44c5-8a88-f6762a7c1105",
                     "expectedControlType": "Vector2",
                     "processors": "InvertVector2(invertX=false)",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Run",
@@ -27,7 +29,8 @@
                     "id": "5e7a3092-9b77-4b85-a064-9ff0046995f2",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Jump",
@@ -35,7 +38,8 @@
                     "id": "80abb0e1-0532-4356-b9f1-3d4f7752d951",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Interact",
@@ -43,7 +47,8 @@
                     "id": "b80bba0f-31d9-4e61-b6e2-0da4bc7a6789",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Swap",
@@ -51,7 +56,8 @@
                     "id": "09828b97-d997-4aae-b9ef-e88263217ea9",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Zoom",
@@ -59,7 +65,8 @@
                     "id": "8effa107-6c97-4d37-bec4-1be21cfade67",
                     "expectedControlType": "Axis",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Pause",
@@ -67,7 +74,8 @@
                     "id": "895cca3b-b703-43a3-a9c8-2306330688e7",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -252,7 +260,7 @@
                     "id": "6cdc69a8-7c0f-47bb-b798-51fcfa033941",
                     "path": "<Mouse>/delta",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "ScaleVector2(x=0.01,y=0.01)",
                     "groups": "Keyboard + Mouse",
                     "action": "Look",
                     "isComposite": false,

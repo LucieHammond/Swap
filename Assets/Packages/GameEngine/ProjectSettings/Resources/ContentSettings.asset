@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: ContentSettings
   m_EditorClassIdentifier: 
   Configuration:
-    EnableContentData: 1
-    DataContentPath: Assets/StreamingAssets/Dataset/
+    EnableContentData: 0
+    DataContentPath: '{StreamingAssets}/Dataset/'
     FileContentFormat: 0
     FileEncodingType: 0
     EnableContentDescriptors: 1
-    DescriptorContentPath: Assets/StreamingAssets/Bundles/
+    DescriptorContentPath: '{StreamingAssets}/Bundles/'
     DescriptorBundleName: descriptors
-    EnableContentAssets: 1
-    AssetContentPath: Assets/StreamingAssets/Bundles/
+    EnableContentAssets: 0
+    AssetContentPath: '{StreamingAssets}/Bundles/'
