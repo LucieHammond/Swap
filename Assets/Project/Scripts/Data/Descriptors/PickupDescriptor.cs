@@ -3,16 +3,9 @@ using UnityEngine;
 
 namespace Swap.Data.Descriptors
 {
-    [CreateAssetMenu(fileName = "NewPickupDescriptor", menuName = "Content/Game/Pickup Descriptor", order = 141)]
+    [CreateAssetMenu(fileName = "NewPickupDescriptor", menuName = "Content/Game/Pickup Descriptor", order = 143)]
     public class PickupDescriptor : ContentDescriptor
     {
-        [Header("Check")]
-        public Vector3 CheckOffset;
-
-        public float CheckHeight;
-
-        public float CheckRadius;
-
         [Header("Retrieve")]
         public float RetrieveSpeed;
 

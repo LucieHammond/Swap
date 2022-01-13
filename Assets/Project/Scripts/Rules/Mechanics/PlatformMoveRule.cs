@@ -35,13 +35,13 @@ namespace Swap.Rules.Mechanics
 
         private MobilePlatform[] m_MobilePlatforms;
 
-        private Dictionary<int, PlatformInfo> m_InitialInfos;
-        private Dictionary<int, PlatformState> m_CurrentStates;
+        private Dictionary<MobilePlatform, PlatformInfo> m_InitialInfos;
+        private Dictionary<MobilePlatform, PlatformState> m_CurrentStates;
 
         public PlatformMoveRule()
         {
-            m_InitialInfos = new Dictionary<int, PlatformInfo>();
-            m_CurrentStates = new Dictionary<int, PlatformState>();
+            m_InitialInfos = new Dictionary<MobilePlatform, PlatformInfo>();
+            m_CurrentStates = new Dictionary<MobilePlatform, PlatformState>();
         }
 
         #region GameRule cycle
@@ -49,18 +49,18 @@ namespace Swap.Rules.Mechanics
         {
             m_MobilePlatforms = LevelRule.GetMobilePlatforms();
 
-            for (int i = 0; i < m_MobilePlatforms.Length; i++)
+            foreach (MobilePlatform platform in m_MobilePlatforms)
             {
                 PlatformInfo initialInfo = new PlatformInfo()
                 {
-                    PositionA = m_MobilePlatforms[i].transform.position,
-                    RotationA = m_MobilePlatforms[i].transform.eulerAngles,
-                    PositionB = m_MobilePlatforms[i].transform.position + m_MobilePlatforms[i].TranslationalMotion,
-                    RotationB = m_MobilePlatforms[i].transform.eulerAngles + m_MobilePlatforms[i].RotationalMotion
+                    PositionA = platform.transform.position,
+                    RotationA = platform.transform.eulerAngles,
+                    PositionB = platform.transform.position + platform.TranslationalMotion,
+                    RotationB = platform.transform.eulerAngles + platform.RotationalMotion
                 };
 
-                m_InitialInfos.Add(i, initialInfo);
-                m_CurrentStates.Add(i, PlatformState.InPositionA);
+                m_InitialInfos.Add(platform, initialInfo);
+                m_CurrentStates.Add(platform, PlatformState.InPositionA);
             }
 
             MarkInitialized();
@@ -76,23 +76,23 @@ namespace Swap.Rules.Mechanics
 
         protected override void Update()
         {
-            for (int i = 0; i < m_MobilePlatforms.Length; i++)
+            foreach (MobilePlatform platform in m_MobilePlatforms)
             {
-                bool signalValue = LogicRule.IsActiveAll(m_MobilePlatforms[i].SignalsToListen);
+                bool signalValue = LogicRule.IsActiveAll(platform.SignalsToListen);
 
-                switch (m_MobilePlatforms[i].ActivationType)
+                switch (platform.ActivationType)
                 {
                     case (ActivationType.TriggerSwitch):
-                        UpdateWithInstantSwitch(i, signalValue);
+                        UpdateWithInstantSwitch(platform, signalValue);
                         break;
                     case (ActivationType.MatchPosition):
-                        UpdateWithStatusMatching(i, signalValue);
+                        UpdateWithStatusMatching(platform, signalValue);
                         break;
                     case (ActivationType.ControlMotion):
-                        UpdateWithMovementBlocking(i, signalValue);
+                        UpdateWithMovementBlocking(platform, signalValue);
                         break;
                     case (ActivationType.LaunchOneWayChange):
-                        UpdateWithPermanentCompletion(i, signalValue);
+                        UpdateWithPermanentCompletion(platform, signalValue);
                         break;
                 }
             }
@@ -100,59 +100,59 @@ namespace Swap.Rules.Mechanics
         #endregion
 
         #region private
-        private void UpdateWithInstantSwitch(int platformNum, bool signalValue)
+        private void UpdateWithInstantSwitch(MobilePlatform platform, bool signalValue)
         {
-            if ((m_CurrentStates[platformNum] == PlatformState.InPositionA && signalValue) 
-                || m_CurrentStates[platformNum] == PlatformState.MovingFromAToB)
+            if ((m_CurrentStates[platform] == PlatformState.InPositionA && signalValue) 
+                || m_CurrentStates[platform] == PlatformState.MovingFromAToB)
             {
-                m_CurrentStates[platformNum] = MovePlatformTowardsB(m_MobilePlatforms[platformNum], m_InitialInfos[platformNum]);
+                m_CurrentStates[platform] = MovePlatformTowardsB(platform, m_InitialInfos[platform]);
             }
 
-            else if ((m_CurrentStates[platformNum] == PlatformState.InPositionB && signalValue)
-                || m_CurrentStates[platformNum] == PlatformState.MovingFromBToA)
+            else if ((m_CurrentStates[platform] == PlatformState.InPositionB && signalValue)
+                || m_CurrentStates[platform] == PlatformState.MovingFromBToA)
             {
-                m_CurrentStates[platformNum] = MovePlatformTowardsA(m_MobilePlatforms[platformNum], m_InitialInfos[platformNum]);
+                m_CurrentStates[platform] = MovePlatformTowardsA(platform, m_InitialInfos[platform]);
             }
         }
 
-        private void UpdateWithStatusMatching(int platformNum, bool signalValue)
+        private void UpdateWithStatusMatching(MobilePlatform platform, bool signalValue)
         {
-            if (m_CurrentStates[platformNum] != PlatformState.InPositionB && signalValue)
+            if (m_CurrentStates[platform] != PlatformState.InPositionB && signalValue)
             {
-                m_CurrentStates[platformNum] = MovePlatformTowardsB(m_MobilePlatforms[platformNum], m_InitialInfos[platformNum]);
+                m_CurrentStates[platform] = MovePlatformTowardsB(platform, m_InitialInfos[platform]);
             }
 
-            else if (m_CurrentStates[platformNum] != PlatformState.InPositionA && !signalValue)
+            else if (m_CurrentStates[platform] != PlatformState.InPositionA && !signalValue)
             {
-                m_CurrentStates[platformNum] = MovePlatformTowardsA(m_MobilePlatforms[platformNum], m_InitialInfos[platformNum]);
+                m_CurrentStates[platform] = MovePlatformTowardsA(platform, m_InitialInfos[platform]);
             }
         }
 
-        private void UpdateWithMovementBlocking(int platformNum, bool signalValue)
+        private void UpdateWithMovementBlocking(MobilePlatform platform, bool signalValue)
         {
             if (!signalValue)
                 return;
 
-            if (m_CurrentStates[platformNum] == PlatformState.InPositionA || m_CurrentStates[platformNum] == PlatformState.MovingFromAToB)
+            if (m_CurrentStates[platform] == PlatformState.InPositionA || m_CurrentStates[platform] == PlatformState.MovingFromAToB)
             {
-                m_CurrentStates[platformNum] = MovePlatformTowardsB(m_MobilePlatforms[platformNum], m_InitialInfos[platformNum]);
+                m_CurrentStates[platform] = MovePlatformTowardsB(platform, m_InitialInfos[platform]);
             }
 
-            else if (m_CurrentStates[platformNum] == PlatformState.InPositionB || m_CurrentStates[platformNum] == PlatformState.MovingFromBToA)
+            else if (m_CurrentStates[platform] == PlatformState.InPositionB || m_CurrentStates[platform] == PlatformState.MovingFromBToA)
             {
-                m_CurrentStates[platformNum] = MovePlatformTowardsA(m_MobilePlatforms[platformNum], m_InitialInfos[platformNum]);
+                m_CurrentStates[platform] = MovePlatformTowardsA(platform, m_InitialInfos[platform]);
             }
         }
 
-        private void UpdateWithPermanentCompletion(int platformNum, bool signalValue)
+        private void UpdateWithPermanentCompletion(MobilePlatform platform, bool signalValue)
         {
-            if (m_CurrentStates[platformNum] == PlatformState.InPositionB)
+            if (m_CurrentStates[platform] == PlatformState.InPositionB)
                 return;
 
-            if ((m_CurrentStates[platformNum] == PlatformState.InPositionA && signalValue)
-                || m_CurrentStates[platformNum] == PlatformState.MovingFromAToB)
+            if ((m_CurrentStates[platform] == PlatformState.InPositionA && signalValue)
+                || m_CurrentStates[platform] == PlatformState.MovingFromAToB)
             {
-                m_CurrentStates[platformNum] = MovePlatformTowardsB(m_MobilePlatforms[platformNum], m_InitialInfos[platformNum]);
+                m_CurrentStates[platform] = MovePlatformTowardsB(platform, m_InitialInfos[platform]);
             }
         }
 

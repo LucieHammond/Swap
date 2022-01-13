@@ -34,6 +34,7 @@ namespace Swap.Setups.Modes
             rules.AddRule(new CameraRule());
 
             rules.AddRule(new SwapRule());
+            rules.AddRule(new InteractionRule());
             rules.AddRule(new ButtonPressRule());
             rules.AddRule(new GemPickupRule());
             rules.AddRule(new GemReceptionRule());
@@ -46,14 +47,15 @@ namespace Swap.Setups.Modes
         {
             return new List<Type>()
             {
-                typeof(StartRule),
                 typeof(LevelRule),
                 typeof(LogicRule),
+                typeof(StartRule),
                 typeof(DefeatRule),
                 typeof(VictoryRule),
                 typeof(ControllerRule),
                 typeof(CharacterRule),
                 typeof(SwapRule),
+                typeof(InteractionRule),
                 typeof(ButtonPressRule),
                 typeof(GemPickupRule),
                 typeof(GemReceptionRule),
@@ -94,8 +96,9 @@ namespace Swap.Setups.Modes
         {
             return new List<RuleScheduling>()
             {
-                new RuleScheduling(typeof(LogicRule), 1, 0),
-                new RuleScheduling(typeof(ControllerRule), 1, 0)
+                new RuleScheduling(typeof(InteractionRule), 1, 0),
+                new RuleScheduling(typeof(ControllerRule), 1, 0),
+                new RuleScheduling(typeof(LogicRule), 1, 0)
             };
         }
 

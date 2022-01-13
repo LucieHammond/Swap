@@ -5,7 +5,9 @@ using Swap.Components;
 using Swap.Data.Descriptors;
 using Swap.Data.Models;
 using Swap.Interfaces;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Swap.Rules.Mechanics
@@ -24,16 +26,20 @@ namespace Swap.Rules.Mechanics
         [RuleDependency(RuleDependencySource.SameModule, true)]
         public IControllerRule ControllerRule;
 
+        [RuleDependency(RuleDependencySource.SameModule, true)]
+        public IInteractionRule InteractionRule;
+
         private PressDescriptor m_Descriptor;
 
-        private LevelState m_LevelState;
         private Button[] m_Buttons;
 
-        private Dictionary<int, float> m_Triggers;
+        private Dictionary<Button, float> m_CurrentCoolDowns;
+        private Dictionary<Button, float> m_Activations;
 
         public ButtonPressRule()
         {
-            m_Triggers = new Dictionary<int, float>();
+            m_CurrentCoolDowns = new Dictionary<Button, float>();
+            m_Activations = new Dictionary<Button, float>();
         }
 
         #region GameRule cycle
@@ -41,12 +47,12 @@ namespace Swap.Rules.Mechanics
         {
             m_Descriptor = ContentService.GetContentDescriptor<PressDescriptor>("ButtonPress");
 
-            m_LevelState = LevelRule.GetLevelState();
             m_Buttons = LevelRule.GetButtons();
 
-            for (int i = 0; i < m_Buttons.Length; i++)
+            foreach (Button button in m_Buttons)
             {
-                m_Triggers.Add(i, -1.0f);
+                m_CurrentCoolDowns.Add(button, -1.0f);
+                m_Activations.Add(button, -1.0f);
             }
 
             MarkInitialized();
@@ -54,73 +60,62 @@ namespace Swap.Rules.Mechanics
 
         protected override void Unload()
         {
-            m_Triggers.Clear();
+            m_CurrentCoolDowns.Clear();
+            m_Activations.Clear();
 
             MarkUnloaded();
         }
 
         protected override void Update()
         {
+            UpdateCoolDownSchedules();
             UpdateActivationSchedules();
 
-            if (ControllerRule.AskedInteraction() && m_LevelState.CurrentRobotBody != null)
-            {
-                if (GetEligibleButton(m_LevelState.CurrentRobotBody.InteractRoot, out int buttonIndex) && IsReady(buttonIndex))
-                {
-                    TriggerButton(buttonIndex);
+            bool pressPossible = InteractionRule.FindEligibleInteraction(
+                m_Buttons.Where((button) => IsReady(button)), (button) => button.Interactivity, out Button interactingButton);
 
-                    ControllerRule.ResetInteraction();
-                }
+            if (ControllerRule.AskedInteraction() && pressPossible)
+            {
+                TriggerButton(interactingButton);
             }
         }
         #endregion
 
         #region private
-        private bool GetEligibleButton(Transform interactRoot, out int buttonIndex)
+        private bool IsReady(Button button)
         {
-            buttonIndex = -1;
-            float minDistance = float.MaxValue;
+            return m_CurrentCoolDowns[button] < 0;
+        }
 
-            for (int i = 0; i < m_Buttons.Length; i++)
+        private void TriggerButton(Button button)
+        {
+            button.Animator.SetTrigger(m_Descriptor.AnimationParameter);
+            m_CurrentCoolDowns[button] = m_Descriptor.CoolDownTime;
+            m_Activations[button] = m_Descriptor.ActivationDelay;
+        }
+
+        private void UpdateCoolDownSchedules()
+        {
+            foreach (Button button in m_Buttons)
             {
-                Vector3 triggerCenter = m_Buttons[i].transform.position + m_Buttons[i].transform.rotation * m_Descriptor.TriggerOffset;
-                float distance = Vector3.Distance(interactRoot.position, triggerCenter);
-
-                if (distance > m_Descriptor.TriggerRadius)
-                    continue;
-
-                if (distance < minDistance)
+                if (m_CurrentCoolDowns[button] >= 0)
                 {
-                    minDistance = distance;
-                    buttonIndex = i;
+                    m_CurrentCoolDowns[button] -= m_Time.DeltaTime;
                 }
             }
-
-            return buttonIndex >= 0;
-        }
-
-        private bool IsReady(int buttonIndex)
-        {
-            return m_Triggers[buttonIndex] < 0;
-        }
-
-        private void TriggerButton(int buttonIndex)
-        {
-            m_Buttons[buttonIndex].Animator.SetTrigger("Press");
-            m_Triggers[buttonIndex] = m_Descriptor.ActivationDelay;
         }
 
         private void UpdateActivationSchedules()
         {
-            for (int i = 0; i < m_Buttons.Length; i++)
+            foreach (Button button in m_Buttons)
             {
-                if (m_Triggers[i] >= 0)
+                if (m_Activations[button] >= 0)
                 {
-                    m_Triggers[i] -= m_Time.DeltaTime;
+                    m_Activations[button] -= m_Time.DeltaTime;
                     
-                    if (m_Triggers[i] < 0)
+                    if (m_Activations[button] < 0)
                     {
-                        LogicRule.TriggerInstantSignal(m_Buttons[i].SignalToSend);
+                        LogicRule.TriggerInstantSignal(button.SignalToSend);
                     }
                 }
             }

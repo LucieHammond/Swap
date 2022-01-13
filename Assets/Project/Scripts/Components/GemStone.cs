@@ -8,5 +8,7 @@ namespace Swap.Components
         public BasicColor Color;
 
         public Rigidbody RigidBody;
+
+        public Interactivity Interactivity;
     }
 }

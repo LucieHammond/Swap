@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace Swap.Data.Descriptors
 {
-    [CreateAssetMenu(fileName = "NewPressDescriptor", menuName = "Content/Game/Press Descriptor", order = 143)]
+    [CreateAssetMenu(fileName = "NewPressDescriptor", menuName = "Content/Game/Press Descriptor", order = 142)]
     public class PressDescriptor : ContentDescriptor
     {
         [Header("Trigger")]
-        public Vector3 TriggerOffset;
+        public string AnimationParameter;
 
-        public float TriggerRadius;
+        public float CoolDownTime;
 
         [Header("Activation")]
         public float ActivationDelay;

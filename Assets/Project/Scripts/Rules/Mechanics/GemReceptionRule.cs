@@ -35,15 +35,15 @@ namespace Swap.Rules.Mechanics
         private GemReceptacle[] m_GemReceptacles;
         private Transform m_GemsRoot;
 
-        private Dictionary<int, int> m_CurrentConnections;
-        private Dictionary<int, ReceptionState> m_CurrentStates;
-        private Dictionary<int, bool> m_Activations;
+        private Dictionary<GemReceptacle, GemStone> m_CurrentConnections;
+        private Dictionary<GemReceptacle, ReceptionState> m_CurrentStates;
+        private Dictionary<GemReceptacle, bool> m_Activations;
 
         public GemReceptionRule()
         {
-            m_CurrentConnections = new Dictionary<int, int>();
-            m_CurrentStates = new Dictionary<int, ReceptionState>();
-            m_Activations = new Dictionary<int, bool>();
+            m_CurrentConnections = new Dictionary<GemReceptacle, GemStone>();
+            m_CurrentStates = new Dictionary<GemReceptacle, ReceptionState>();
+            m_Activations = new Dictionary<GemReceptacle, bool>();
         }
 
         #region GameRule cycle
@@ -55,11 +55,11 @@ namespace Swap.Rules.Mechanics
             m_GemReceptacles = LevelRule.GetGemReceptacles();
             m_GemsRoot = LevelRule.GetRootTransform("Objects");
 
-            for (int i = 0; i < m_GemReceptacles.Length; i++)
+            foreach (GemReceptacle receptacle in m_GemReceptacles)
             {
-                m_CurrentConnections.Add(i, -1);
-                m_CurrentStates.Add(i, ReceptionState.Waiting);
-                m_Activations.Add(i, false);
+                m_CurrentConnections.Add(receptacle, null);
+                m_CurrentStates.Add(receptacle, ReceptionState.Waiting);
+                m_Activations.Add(receptacle, false);
             }
 
             MarkInitialized();
@@ -86,49 +86,49 @@ namespace Swap.Rules.Mechanics
         #region private
         private void UpdateConnections()
         {
-            for (int i = 0; i < m_GemReceptacles.Length; i++)
+            foreach (GemReceptacle receptacle in m_GemReceptacles)
             {
-                if (m_CurrentConnections[i] >= 0)
+                if (m_CurrentConnections[receptacle] != null)
                 {
-                    bool lostConnection = m_GemStones[m_CurrentConnections[i]].transform.parent != m_GemReceptacles[i].ObjectRoot;
+                    bool lostConnection = m_CurrentConnections[receptacle].transform.parent != receptacle.ObjectRoot;
                     if (lostConnection)
                     {
-                        OnConnectionLost(m_CurrentStates[i], m_GemReceptacles[i], m_CurrentConnections[i]);
+                        OnConnectionLost(m_CurrentStates[receptacle], receptacle, m_CurrentConnections[receptacle]);
 
-                        m_CurrentConnections[i] = -1;
-                        m_CurrentStates[i] = ReceptionState.Waiting;
+                        m_CurrentConnections[receptacle] = null;
+                        m_CurrentStates[receptacle] = ReceptionState.Waiting;
                     }
                 }
                 else
                 {
-                    bool newConnection = FindMatchingGemStone(m_GemReceptacles[i], out int stoneIndex);
+                    bool newConnection = FindMatchingGemStone(receptacle, out GemStone matchingStone);
                     if (newConnection)
                     {
-                        m_GemStones[stoneIndex].transform.SetParent(m_GemReceptacles[i].ObjectRoot, true);
-                        m_GemStones[stoneIndex].RigidBody.isKinematic = true;
+                        matchingStone.transform.SetParent(receptacle.ObjectRoot, true);
+                        matchingStone.RigidBody.isKinematic = true;
 
-                        m_CurrentConnections[i] = stoneIndex;
-                        m_CurrentStates[i] = ReceptionState.Attracting;
+                        m_CurrentConnections[receptacle] = matchingStone;
+                        m_CurrentStates[receptacle] = ReceptionState.Attracting;
                     }
                 }
             }
         }
 
-        private bool FindMatchingGemStone(GemReceptacle receptacle, out int stoneIndex)
+        private bool FindMatchingGemStone(GemReceptacle receptacle, out GemStone matchingStone)
         {
-            stoneIndex = -1;
-            for (int i = 0; i < m_GemStones.Length; i++)
+            matchingStone = null;
+            foreach (GemStone gemstone in m_GemStones)
             {
-                if (m_GemStones[i].transform.parent != m_GemsRoot)
+                if (gemstone.transform.parent != m_GemsRoot)
                     continue;
 
-                if (receptacle.Color != m_GemStones[i].Color)
+                if (receptacle.Color != gemstone.Color)
                     continue;
 
                 Vector3 connectionCenter = receptacle.ObjectRoot.position + m_Descriptor.ConnectionCenter;
-                if (Vector3.Distance(connectionCenter, m_GemStones[i].transform.position) <= m_Descriptor.ConnectionRadius)
+                if (Vector3.Distance(connectionCenter, gemstone.transform.position) <= m_Descriptor.ConnectionRadius)
                 {
-                    stoneIndex = i;
+                    matchingStone = gemstone;
                     return true;
                 }
             }
@@ -136,25 +136,25 @@ namespace Swap.Rules.Mechanics
             return false;
         }
 
-        private void OnConnectionLost(ReceptionState previousState, GemReceptacle receptacle, int stoneIndex)
+        private void OnConnectionLost(ReceptionState previousState, GemReceptacle receptacle, GemStone stone)
         {
             if (previousState == ReceptionState.Holding || previousState == ReceptionState.Inserting)
-                m_GemStones[stoneIndex].transform.position = receptacle.ObjectRoot.position + m_Descriptor.AttractionCenter;
+                stone.transform.position = receptacle.ObjectRoot.position + m_Descriptor.AttractionCenter;
         }
 
         private void PerformAttractions()
         {
-            for (int i = 0; i < m_GemReceptacles.Length; i++)
+            foreach (GemReceptacle receptacle in m_GemReceptacles)
             {
-                if (m_CurrentStates[i] == ReceptionState.Attracting)
+                if (m_CurrentStates[receptacle] == ReceptionState.Attracting)
                 {
-                    GemStone gemStone = m_GemStones[m_CurrentConnections[i]];
-                    Vector3 attractionPosition = m_GemReceptacles[i].ObjectRoot.position + m_Descriptor.AttractionCenter;
+                    GemStone gemStone = m_CurrentConnections[receptacle];
+                    Vector3 attractionPosition = receptacle.ObjectRoot.position + m_Descriptor.AttractionCenter;
                     Quaternion attractionRotation = Quaternion.identity;
 
                     if (gemStone.transform.MoveTowards(attractionPosition, attractionRotation, m_Descriptor.AttractionSpeed, m_Time.DeltaTime))
                     {
-                        m_CurrentStates[i] = ReceptionState.Inserting;
+                        m_CurrentStates[receptacle] = ReceptionState.Inserting;
                     }
                 }
             }
@@ -162,17 +162,17 @@ namespace Swap.Rules.Mechanics
 
         private void PerformInsertions()
         {
-            for (int i = 0; i < m_GemReceptacles.Length; i++)
+            foreach (GemReceptacle receptacle in m_GemReceptacles)
             {
-                if (m_CurrentStates[i] == ReceptionState.Inserting)
+                if (m_CurrentStates[receptacle] == ReceptionState.Inserting)
                 {
-                    GemStone gemStone = m_GemStones[m_CurrentConnections[i]];
-                    Vector3 insertionPosition = m_GemReceptacles[i].ObjectRoot.position;
+                    GemStone gemStone = m_CurrentConnections[receptacle];
+                    Vector3 insertionPosition = receptacle.ObjectRoot.position;
                     Quaternion insertionRotation = Quaternion.identity;
 
                     if (gemStone.transform.MoveTowards(insertionPosition, insertionRotation, m_Descriptor.InsertionSpeed, m_Time.DeltaTime))
                     {
-                        m_CurrentStates[i] = ReceptionState.Holding;
+                        m_CurrentStates[receptacle] = ReceptionState.Holding;
                     }
                 }
             }
@@ -180,30 +180,29 @@ namespace Swap.Rules.Mechanics
 
         private void CheckActivations()
         {
-            for (int i = 0; i < m_GemReceptacles.Length; i++)
+            foreach (GemReceptacle receptacle in m_GemReceptacles)
             {
-                bool activated = IsActivated(i);
+                bool activated = IsActivated(receptacle);
 
-                if (activated && !m_Activations[i])
+                if (activated && !m_Activations[receptacle])
                 {
-                    m_Activations[i] = true;
-                    LogicRule.UpdateStatusSignal(m_GemReceptacles[i].SignalToSend, true);
+                    m_Activations[receptacle] = true;
+                    LogicRule.UpdateStatusSignal(receptacle.SignalToSend, true);
                 }
-                else if (!activated && m_Activations[i])
+                else if (!activated && m_Activations[receptacle])
                 {
-                    m_Activations[i] = false;
-                    LogicRule.UpdateStatusSignal(m_GemReceptacles[i].SignalToSend, false);
+                    m_Activations[receptacle] = false;
+                    LogicRule.UpdateStatusSignal(receptacle.SignalToSend, false);
                 }
             }
         }
 
-        private bool IsActivated(int receptacleIndex)
+        private bool IsActivated(GemReceptacle gemReceptacle)
         {
-            if (m_CurrentConnections[receptacleIndex] < 0)
+            if (m_CurrentConnections[gemReceptacle] == null)
                 return false;
 
-            GemReceptacle gemReceptacle = m_GemReceptacles[receptacleIndex];
-            GemStone gemStone = m_GemStones[m_CurrentConnections[receptacleIndex]];
+            GemStone gemStone = m_CurrentConnections[gemReceptacle];
 
             return gemReceptacle.Color == gemStone.Color 
                 && Vector3.Distance(gemReceptacle.ObjectRoot.position, gemStone.transform.position) < m_Descriptor.ActivationRadius;

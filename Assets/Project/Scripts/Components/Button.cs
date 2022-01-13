@@ -8,5 +8,7 @@ namespace Swap.Components
         public Signal SignalToSend;
 
         public Animator Animator;
+
+        public Interactivity Interactivity;
     }
 }

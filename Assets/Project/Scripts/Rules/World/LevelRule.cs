@@ -91,7 +91,8 @@ namespace Swap.Rules.World
 
             m_CurrentState = new LevelState()
             {
-                CurrentRobotBody = m_PlayerSoul.GetComponentInParent<RobotBody>()
+                CurrentRobotBody = m_PlayerSoul.GetComponentInParent<RobotBody>(),
+                CurrentlyHeldGems = new Dictionary<RobotBody, GemStone>()
             };
 
             MarkInitialized();

@@ -19,8 +19,5 @@ namespace Swap.Interfaces
         float GetZoomValue();
 
         bool AskedPause();
-
-
-        void ResetInteraction();
     }
 }
