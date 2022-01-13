@@ -130,6 +130,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SignalToSend: 0
   Animator: {fileID: 8418784572109133680}
+  Interactivity:
+    CenterOffset: {x: 0, y: 0, z: 0.15}
+    MarkerDistance: 0.2
+    Collider: {fileID: 7525922802089870759}
 --- !u!95 &8418784572109133680
 Animator:
   serializedVersion: 3

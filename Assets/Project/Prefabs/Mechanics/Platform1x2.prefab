@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActivationType: 0
-  SignalsToListen: 01000000
+  SignalsToListen: 
   TranslationalMotion: {x: 0, y: 0, z: 0}
   RotationalMotion: {x: -50, y: 0, z: 0}
   MovementDuration: 3

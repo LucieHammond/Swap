@@ -129,6 +129,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Color: 0
   RigidBody: {fileID: 2011066715833898121}
+  Interactivity:
+    CenterOffset: {x: 0, y: 0, z: 0}
+    MarkerDistance: 0.25
+    Collider: {fileID: 7247058178299975395}
 --- !u!64 &7247058178299975395
 MeshCollider:
   m_ObjectHideFlags: 0

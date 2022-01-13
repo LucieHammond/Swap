@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f7d6df177095094d8c5747cee384822, type: 3}
-  m_Name: ButtonPress
+  m_Script: {fileID: 11500000, guid: 69e18699dfa12ec40a5aa1ac15183a86, type: 3}
+  m_Name: Interaction
   m_EditorClassIdentifier: 
   ContentId: 
-  AnimationParameter: Press
-  CoolDownTime: 0.3
-  ActivationDelay: 0.2
+  CheckHeight: 0.75
+  CheckRadius: 1
+  CheckRaycastLayers:
+    serializedVersion: 2
+    m_Bits: 1025

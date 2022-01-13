@@ -13,9 +13,6 @@ MonoBehaviour:
   m_Name: GemPickup
   m_EditorClassIdentifier: 
   ContentId: 
-  CheckOffset: {x: 0, y: -0.1, z: 0}
-  CheckHeight: 0.75
-  CheckRadius: 0.8
   RetrieveSpeed: 2.5
   ReleaseSpeed: 1.7
   ReleaseOffset: {x: 0.2, y: 0.1, z: 0}
