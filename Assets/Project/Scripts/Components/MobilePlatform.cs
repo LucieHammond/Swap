@@ -15,5 +15,7 @@ namespace Swap.Components
         public Vector3 RotationalMotion;
 
         public float MovementDuration;
+
+        public Collider Collider;
     }
 }

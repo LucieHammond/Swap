@@ -49,6 +49,7 @@ MonoBehaviour:
   TranslationalMotion: {x: 0, y: 0, z: 0}
   RotationalMotion: {x: -50, y: 0, z: 0}
   MovementDuration: 3
+  Collider: {fileID: 8285292782321055656}
 --- !u!1 &8285292782321055663
 GameObject:
   m_ObjectHideFlags: 0

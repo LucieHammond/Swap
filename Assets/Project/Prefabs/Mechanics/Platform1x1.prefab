@@ -51,6 +51,7 @@ MonoBehaviour:
   TranslationalMotion: {x: 0, y: 0, z: 0}
   RotationalMotion: {x: 0, y: 0, z: 0}
   MovementDuration: 5
+  Collider: {fileID: 1312637295609134008}
 --- !u!33 &1312637295609134014
 MeshFilter:
   m_ObjectHideFlags: 0

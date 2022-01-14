@@ -33,7 +33,11 @@ namespace Swap.Rules.Mechanics
         [RuleDependency(RuleDependencySource.SameModule, true)]
         public ILogicRule LogicRule;
 
+        [RuleDependency(RuleDependencySource.SameModule, true)]
+        public IMotionRule MotionRule;
+
         private MobilePlatform[] m_MobilePlatforms;
+        private RobotBody[] m_Robots;
 
         private Dictionary<MobilePlatform, PlatformInfo> m_InitialInfos;
         private Dictionary<MobilePlatform, PlatformState> m_CurrentStates;
@@ -48,6 +52,7 @@ namespace Swap.Rules.Mechanics
         protected override void Initialize()
         {
             m_MobilePlatforms = LevelRule.GetMobilePlatforms();
+            m_Robots = LevelRule.GetRobotBodies();
 
             foreach (MobilePlatform platform in m_MobilePlatforms)
             {
@@ -160,6 +165,7 @@ namespace Swap.Rules.Mechanics
         {
             Vector3 positionDiff = -platform.TranslationalMotion * m_Time.DeltaTime / platform.MovementDuration;
             Vector3 rotationDiff = -platform.RotationalMotion * m_Time.DeltaTime / platform.MovementDuration;
+            ApplyMoveToRobots(platform, positionDiff, rotationDiff);
 
             if (positionDiff.magnitude < Vector3.Distance(platform.transform.position, info.PositionA)
                 || rotationDiff.magnitude < Quaternion.Angle(platform.transform.rotation, Quaternion.Euler(info.RotationA)))
@@ -180,6 +186,7 @@ namespace Swap.Rules.Mechanics
         {
             Vector3 positionDiff = platform.TranslationalMotion * m_Time.DeltaTime / platform.MovementDuration;
             Vector3 rotationDiff = platform.RotationalMotion * m_Time.DeltaTime / platform.MovementDuration;
+            ApplyMoveToRobots(platform, positionDiff, rotationDiff);
 
             if (positionDiff.magnitude < Vector3.Distance(platform.transform.position, info.PositionB)
                 || rotationDiff.magnitude < Quaternion.Angle(platform.transform.rotation, Quaternion.Euler(info.RotationB)))
@@ -193,6 +200,22 @@ namespace Swap.Rules.Mechanics
                 platform.transform.position = info.PositionB;
                 platform.transform.eulerAngles = info.RotationB;
                 return PlatformState.InPositionB;
+            }
+        }
+
+        private void ApplyMoveToRobots(MobilePlatform platform, Vector3 positionMove, Vector3 rotationMove)
+        {
+            foreach (RobotBody robot in m_Robots)
+            {
+                if (MotionRule.IsCurrentlyGrounded(robot, out Collider groundCollider, out _) && groundCollider == platform.Collider)
+                {
+                    Vector3 relativePosition = robot.transform.position - platform.transform.position;
+                    Vector3 translation = positionMove - relativePosition + Quaternion.Euler(rotationMove) * relativePosition;
+                    MotionRule.ApplyTranslationalMovement(robot, translation);
+
+                    float rotation = rotationMove.y;
+                    MotionRule.ApplyRotationalMovement(robot, rotation);
+                }
             }
         }
         #endregion
