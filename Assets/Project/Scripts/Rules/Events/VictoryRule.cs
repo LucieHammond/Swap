@@ -10,7 +10,7 @@ using Swap.Interfaces;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Swap.Rules.World
+namespace Swap.Rules.Events
 {
     public class VictoryRule : GameRule, ISceneGameRule
     {

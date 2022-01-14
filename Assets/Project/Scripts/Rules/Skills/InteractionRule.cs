@@ -7,7 +7,7 @@ using Swap.Interfaces;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Swap.Rules.Mechanics
+namespace Swap.Rules.Skills
 {
     [RuleAccess(typeof(IInteractionRule))]
     public class InteractionRule : GameRule, IInteractionRule

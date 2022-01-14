@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Swap.Data.Descriptors
 {
-    [CreateAssetMenu(fileName = "NewStartDescriptor", menuName = "Content/Game/Start Descriptor", order = 160)]
+    [CreateAssetMenu(fileName = "NewStartDescriptor", menuName = "Content/Game/Start Descriptor", order = 180)]
     public class StartDescriptor : ContentDescriptor
     {
         [Header("Start Screen")]

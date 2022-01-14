@@ -6,7 +6,9 @@ using GameEngine.PMR.Rules;
 using GameEngine.PMR.Rules.Scheduling;
 using GameEngine.PMR.Unity.Modules;
 using Swap.Rules.Controls;
+using Swap.Rules.Events;
 using Swap.Rules.Mechanics;
+using Swap.Rules.Skills;
 using Swap.Rules.World;
 using System;
 using System.Collections.Generic;
@@ -25,42 +27,48 @@ namespace Swap.Setups.Modes
         {
             rules.AddRule(new LevelRule());
             rules.AddRule(new LogicRule());
-            rules.AddRule(new StartRule());
-            rules.AddRule(new DefeatRule());
-            rules.AddRule(new VictoryRule());
 
-            rules.AddRule(new ControllerRule());
-            rules.AddRule(new CharacterRule());
             rules.AddRule(new CameraRule());
+            rules.AddRule(new CharacterRule());
+            rules.AddRule(new ControllerRule());
 
             rules.AddRule(new SwapRule());
             rules.AddRule(new InteractionRule());
+            
             rules.AddRule(new ButtonPressRule());
             rules.AddRule(new GemPickupRule());
             rules.AddRule(new GemReceptionRule());
-
             rules.AddRule(new DoorOpeningRule());
             rules.AddRule(new PlatformMoveRule());
+
+            rules.AddRule(new StartRule());
+            rules.AddRule(new DefeatRule());
+            rules.AddRule(new VictoryRule());
         }
 
         public List<Type> GetInitUnloadOrder()
         {
             return new List<Type>()
             {
+                typeof(StartRule),
+
                 typeof(LevelRule),
                 typeof(LogicRule),
-                typeof(StartRule),
-                typeof(DefeatRule),
-                typeof(VictoryRule),
+
                 typeof(ControllerRule),
                 typeof(CharacterRule),
+
                 typeof(SwapRule),
                 typeof(InteractionRule),
+
                 typeof(ButtonPressRule),
                 typeof(GemPickupRule),
                 typeof(GemReceptionRule),
                 typeof(DoorOpeningRule),
                 typeof(PlatformMoveRule),
+
+                typeof(DefeatRule),
+                typeof(VictoryRule),
 
                 typeof(CameraRule)
             };
@@ -74,6 +82,7 @@ namespace Swap.Setups.Modes
                 new RuleScheduling(typeof(CameraRule), 1, 0),
                 
                 new RuleScheduling(typeof(SwapRule), 1, 0),
+
                 new RuleScheduling(typeof(ButtonPressRule), 1, 0),
                 new RuleScheduling(typeof(GemPickupRule), 1, 0),
                 new RuleScheduling(typeof(GemReceptionRule), 1, 0),

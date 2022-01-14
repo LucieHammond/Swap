@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Swap.Rules.World
+namespace Swap.Rules.Events
 {
     public class StartRule : GameRule, ISceneGameRule
     {

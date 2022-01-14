@@ -3,12 +3,9 @@ using GameEngine.PMR.Rules.Dependencies;
 using GameEngine.PMR.Unity.Basics.Content;
 using Swap.Components;
 using Swap.Data.Descriptors;
-using Swap.Data.Models;
 using Swap.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Swap.Rules.Mechanics
 {

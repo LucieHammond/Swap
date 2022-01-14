@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Swap.Data.Descriptors
 {
-    [CreateAssetMenu(fileName = "NewPickupDescriptor", menuName = "Content/Game/Pickup Descriptor", order = 143)]
+    [CreateAssetMenu(fileName = "NewPickupDescriptor", menuName = "Content/Game/Pickup Descriptor", order = 161)]
     public class PickupDescriptor : ContentDescriptor
     {
         [Header("Retrieve")]

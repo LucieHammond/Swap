@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Swap.Data.Descriptors
 {
-    [CreateAssetMenu(fileName = "NewDefeatDescriptor", menuName = "Content/Game/Defeat Descriptor", order = 161)]
+    [CreateAssetMenu(fileName = "NewDefeatDescriptor", menuName = "Content/Game/Defeat Descriptor", order = 181)]
     public class DefeatDescriptor : ContentDescriptor
     {
         [Header("Conditions")]

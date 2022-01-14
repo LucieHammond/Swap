@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Swap.Data.Descriptors
 {
-    [CreateAssetMenu(fileName = "NewReceptionDescriptor", menuName = "Content/Game/Reception Descriptor", order = 144)]
+    [CreateAssetMenu(fileName = "NewReceptionDescriptor", menuName = "Content/Game/Reception Descriptor", order = 162)]
     public class ReceptionDescriptor : ContentDescriptor
     {
         [Header("Connection")]

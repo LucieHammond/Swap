@@ -9,7 +9,7 @@ using Swap.Interfaces;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Swap.Rules.Mechanics
+namespace Swap.Rules.Skills
 {
     public class SwapRule : GameRule, ISceneGameRule
     {

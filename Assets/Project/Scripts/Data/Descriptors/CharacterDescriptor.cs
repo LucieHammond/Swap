@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Swap.Data.Descriptors
 {
-    [CreateAssetMenu(fileName = "NewCharacterDescriptor", menuName = "Content/Game/Character Descriptor", order = 120)]
+    [CreateAssetMenu(fileName = "NewCharacterDescriptor", menuName = "Content/Game/Character Descriptor", order = 121)]
     public class CharacterDescriptor : ContentDescriptor
     {
         [Header("Movement")]
