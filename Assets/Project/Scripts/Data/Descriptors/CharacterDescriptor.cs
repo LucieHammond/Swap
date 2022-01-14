@@ -30,21 +30,6 @@ namespace Swap.Data.Descriptors
 
         public float JumpCooldown;
 
-        [Header("Fall")]
-        public float FallGravity;
-
-        public float MaxFallSpeed;
-
-        [Header("Ground")]
-        public Vector3 GroundCheckOffset;
-
-        public float GroundCheckRadius;
-
-        public LayerMask GroundLayers;
-
-        [Header("Slope")]
-        public float SlopeMinAngle;
-
-        public float SlopeMaxAngle;
+        public float JumpGravity;
     }
 }

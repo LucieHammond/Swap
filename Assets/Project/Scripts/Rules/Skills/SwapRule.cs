@@ -174,7 +174,7 @@ namespace Swap.Rules.Skills
             m_PartnerSoul.transform.SetParent(m_SwapStart, true);
 
             m_LevelState.CurrentRobotBody = m_SwapArrival.GetComponentInParent<RobotBody>();
-            CharacterRule.EnterCharacter(m_LevelState.CurrentRobotBody.gameObject);
+            CharacterRule.EnterCharacter(m_LevelState.CurrentRobotBody);
 
             m_IsSwapping = false;
             m_PartnerSoul = null;

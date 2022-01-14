@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+﻿using Swap.Components;
 
 namespace Swap.Interfaces
 {
     public interface ICharacterRule
     {
-        void EnterCharacter(GameObject character);
+        void EnterCharacter(RobotBody character);
 
         void ExitCharacter();
     }
