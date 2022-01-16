@@ -35,5 +35,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/Scenes/UI/SwapUI.unity
     guid: de1bd8c723af65a4f82f9ae990a565cd
+  - enabled: 1
+    path: Assets/Project/Scenes/UI/InteractionUI.unity
+    guid: 92ce5ef182fdbea44952dc306aadeb6b
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: f20d38acde2d7774da4d6ecf756e7ca3, type: 2}
