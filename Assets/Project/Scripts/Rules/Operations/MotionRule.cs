@@ -7,7 +7,7 @@ using Swap.Interfaces;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Swap.Rules.Controls
+namespace Swap.Rules.Operations
 {
     [RuleAccess(typeof(IMotionRule))]
     public class MotionRule : GameRule, IMotionRule

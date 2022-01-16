@@ -7,7 +7,7 @@ using Swap.Interfaces;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Swap.Rules.Skills
+namespace Swap.Rules.Operations
 {
     [RuleAccess(typeof(IInteractionRule))]
     public class InteractionRule : GameRule, IInteractionRule
@@ -39,9 +39,7 @@ namespace Swap.Rules.Skills
             MarkUnloaded();
         }
 
-        protected override void Update() { }
-
-        protected override void LateUpdate()
+        protected override void Update() 
         {
             m_FoundInteraction = false;
         }

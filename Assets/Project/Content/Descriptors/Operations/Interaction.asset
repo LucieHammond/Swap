@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ContentId: 
   CheckHeight: 0.75
-  CheckRadius: 1
+  CheckRadius: 1.15
   CheckRaycastLayers:
     serializedVersion: 2
     m_Bits: 1025

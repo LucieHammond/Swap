@@ -8,6 +8,7 @@ using GameEngine.PMR.Unity.Modules;
 using Swap.Rules.Controls;
 using Swap.Rules.Events;
 using Swap.Rules.Mechanics;
+using Swap.Rules.Operations;
 using Swap.Rules.Skills;
 using Swap.Rules.World;
 using System;
@@ -31,16 +32,17 @@ namespace Swap.Setups.Modes
             rules.AddRule(new CameraRule());
             rules.AddRule(new CharacterRule());
             rules.AddRule(new ControllerRule());
-            rules.AddRule(new MotionRule());
 
             rules.AddRule(new SwapRule());
-            rules.AddRule(new InteractionRule());
 
             rules.AddRule(new ButtonPressRule());
             rules.AddRule(new GemPickupRule());
             rules.AddRule(new GemReceptionRule());
             rules.AddRule(new DoorOpeningRule());
             rules.AddRule(new PlatformMoveRule());
+
+            rules.AddRule(new MotionRule());
+            rules.AddRule(new InteractionRule());
 
             rules.AddRule(new StartRule());
             rules.AddRule(new DefeatRule());
@@ -58,16 +60,17 @@ namespace Swap.Setups.Modes
 
                 typeof(ControllerRule),
                 typeof(CharacterRule),
-                typeof(MotionRule),
 
                 typeof(SwapRule),
-                typeof(InteractionRule),
 
                 typeof(ButtonPressRule),
                 typeof(GemPickupRule),
                 typeof(GemReceptionRule),
                 typeof(DoorOpeningRule),
                 typeof(PlatformMoveRule),
+
+                typeof(MotionRule),
+                typeof(InteractionRule),
 
                 typeof(DefeatRule),
                 typeof(VictoryRule),
@@ -93,6 +96,7 @@ namespace Swap.Setups.Modes
                 new RuleScheduling(typeof(PlatformMoveRule), 1, 0),
 
                 new RuleScheduling(typeof(MotionRule), 1, 0),
+                new RuleScheduling(typeof(InteractionRule), 1, 0),
 
                 new RuleScheduling(typeof(StartRule), 1, 0),
                 new RuleScheduling(typeof(DefeatRule), 1, 0),
@@ -109,7 +113,6 @@ namespace Swap.Setups.Modes
         {
             return new List<RuleScheduling>()
             {
-                new RuleScheduling(typeof(InteractionRule), 1, 0),
                 new RuleScheduling(typeof(ControllerRule), 1, 0),
                 new RuleScheduling(typeof(LogicRule), 1, 0)
             };
