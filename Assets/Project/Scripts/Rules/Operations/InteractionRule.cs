@@ -1,6 +1,8 @@
 ﻿using GameEngine.PMR.Rules;
 using GameEngine.PMR.Rules.Dependencies;
 using GameEngine.PMR.Unity.Basics.Content;
+using GameEngine.PMR.Unity.Rules;
+using GameEngine.PMR.Unity.Rules.Dependencies;
 using Swap.Data.Descriptors;
 using Swap.Data.Models;
 using Swap.Interfaces;
@@ -10,8 +12,13 @@ using UnityEngine;
 namespace Swap.Rules.Operations
 {
     [RuleAccess(typeof(IInteractionRule))]
-    public class InteractionRule : GameRule, IInteractionRule
+    public class InteractionRule : GameRule, ISceneGameRule, IInteractionRule
     {
+        public HashSet<string> RequiredScenes => new HashSet<string>() { "InteractionUI" };
+
+        [ObjectDependency("InteractionInterface", ObjectDependencyElement.GameObject, true)]
+        public GameObject m_InteractionRoot;
+
         [RuleDependency(RuleDependencySource.Service, true)]
         public IDescriptorContentService ContentService;
 
@@ -20,8 +27,15 @@ namespace Swap.Rules.Operations
 
         private InteractDescriptor m_Descriptor;
 
+        private GameObject m_Marker;
+        private Animator m_MarkerAnimator;
+
         private LevelState m_LevelState;
         private bool m_FoundInteraction;
+        private bool m_IsMarkedInteraction;
+        private bool m_IsNewInteraction;
+        private GameObject m_InteractiveElement;
+        private Vector3 m_MarkerPosition;
 
         #region GameRule cycle
         protected override void Initialize()
@@ -30,6 +44,8 @@ namespace Swap.Rules.Operations
 
             m_LevelState = LevelRule.GetLevelState();
             m_FoundInteraction = false;
+            m_Marker = m_InteractionRoot.transform.Find("Marker").gameObject;
+            m_MarkerAnimator = m_Marker.GetComponent<Animator>();
 
             MarkInitialized();
         }
@@ -39,9 +55,28 @@ namespace Swap.Rules.Operations
             MarkUnloaded();
         }
 
-        protected override void Update() 
+        protected override void Update()
         {
+            if (!m_FoundInteraction)
+                m_InteractiveElement = null;
+
+            if (m_FoundInteraction && m_IsMarkedInteraction)
+            {
+                m_Marker.transform.position = m_MarkerPosition;
+                m_Marker.transform.rotation = Quaternion.Euler(0f, Camera.main.transform.eulerAngles.y, 0f);
+                m_Marker.SetActive(true);
+
+                if (m_IsNewInteraction)
+                    m_MarkerAnimator.SetTrigger("Pop");
+            }
+            else
+            {
+                m_Marker.SetActive(false);
+            }
+
             m_FoundInteraction = false;
+            m_IsMarkedInteraction = false;
+            m_IsNewInteraction = false;
         }
         #endregion
 
@@ -59,7 +94,7 @@ namespace Swap.Rules.Operations
             if (currentElement == null)
                 return false;
 
-            m_FoundInteraction = true;
+            RegisterInteractionForFrame(currentElement.gameObject, false);
             return true;
         }
 
@@ -73,6 +108,7 @@ namespace Swap.Rules.Operations
                 return false;
 
             float minDistance = float.MaxValue;
+            Vector3 markerPosition = Vector3.zero;
             Vector3 interactPosition = m_LevelState.CurrentRobotBody.InteractRoot.position;
 
             foreach (T element in elements)
@@ -96,11 +132,27 @@ namespace Swap.Rules.Operations
                 {
                     minDistance = horizontalDistance;
                     eligibleElement = element;
-                    m_FoundInteraction = true;
+                    markerPosition = elementPosition + interactivity.MarkerDistance * Vector3.up;
                 }
             }
 
-            return eligibleElement != null;
+            if (eligibleElement == null)
+                return false;
+
+            RegisterInteractionForFrame(eligibleElement.gameObject, true, markerPosition);
+            return true;
+        }
+        #endregion
+
+        #region private
+        private void RegisterInteractionForFrame(GameObject element, bool marked, Vector3? markerPosition = null)
+        {
+            m_FoundInteraction = true;
+            m_IsMarkedInteraction = marked;
+            m_IsNewInteraction = element != m_InteractiveElement;
+
+            m_InteractiveElement = element;
+            m_MarkerPosition = markerPosition.GetValueOrDefault();
         }
         #endregion
     }
