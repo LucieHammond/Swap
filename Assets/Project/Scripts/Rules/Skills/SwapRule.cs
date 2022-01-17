@@ -101,7 +101,7 @@ namespace Swap.Rules.Skills
 
                 float distanceToCamera = Vector3.Distance(m_Camera.transform.position, worldPosition);
                 Physics.Raycast(m_Camera.ScreenPointToRay(screenPoint), out RaycastHit hit, distanceToCamera, m_Descriptor.VisibleLayers);
-                if (hit.collider == null || hit.collider.gameObject != m_NonPlayerSouls[i].gameObject)
+                if (hit.collider == null || hit.collider != m_NonPlayerSouls[i].Collider)
                     continue;
 
                 if (offsetToCenter < minOffset)

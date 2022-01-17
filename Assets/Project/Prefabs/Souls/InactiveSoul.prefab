@@ -91,8 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8156482722908105229}
   - component: {fileID: -7681187838453264012}
-  - component: {fileID: 8494598184725960354}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: InactiveSoul
   m_TagString: NonPlayerSoul
   m_Icon: {fileID: 0}
@@ -128,19 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Highlight: {fileID: 13374072416112533}
---- !u!135 &8494598184725960354
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4523673178123835628}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.125
-  m_Center: {x: 0, y: 0, z: 0}
+  Collider: {fileID: 3906169486384365384}
 --- !u!1 &5322263812553284726
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,7 +139,8 @@ GameObject:
   - component: {fileID: 444325459625471639}
   - component: {fileID: 1028730791862912341}
   - component: {fileID: 6754560219266481086}
-  m_Layer: 0
+  - component: {fileID: 3906169486384365384}
+  m_Layer: 8
   m_Name: soul_inactive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,3 +210,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &3906169486384365384
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5322263812553284726}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}

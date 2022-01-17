@@ -5,13 +5,25 @@ TagManager:
   serializedVersion: 2
   tags:
   - CinemachineTarget
+  - PlayerSoul
   - NonPlayerSoul
   - RobotBody
   - Button
   - GemStone
   - GemReceptacle
+  - LightEmitter
+  - LightReceiver
+  - DataDownloader
+  - DataUploader
+  - CustomMechanics
   - Door
+  - Generator
+  - Conveyor
   - MobilePlatform
+  - AnimatedPlatform
+  - DeathTrap
+  - Drone
+  - QuestObject
   layers:
   - Default
   - TransparentFX
@@ -19,11 +31,11 @@ TagManager:
   - 
   - Water
   - UI
-  - Body
-  - Soul
-  - StandardControl
-  - SmallControl
+  - Controller
+  - PassController
+  - Character
   - Opening
+  - 
   - 
   - 
   - 

@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 3586993378758692680}
   - component: {fileID: -8281880347100749388}
   - component: {fileID: 8293035710758372600}
-  m_Layer: 9
+  m_Layer: 7
   m_Name: SmallRobot
   m_TagString: RobotBody
   m_Icon: {fileID: 0}
@@ -113,6 +113,7 @@ MonoBehaviour:
   InteractRoot: {fileID: 7286689175119667470}
   ObjectRoot: {fileID: 871525780456201817}
   Controller: {fileID: 8293035710758372600}
+  Collider: {fileID: 2478245036532211098}
 --- !u!143 &8293035710758372600
 CharacterController:
   m_ObjectHideFlags: 0
@@ -143,7 +144,7 @@ GameObject:
   - component: {fileID: 8582101488965545218}
   - component: {fileID: 5835900529111505352}
   - component: {fileID: 2478245036532211098}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: robot_small
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3819020149412361498}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SoulRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

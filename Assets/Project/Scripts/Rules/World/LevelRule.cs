@@ -20,7 +20,7 @@ namespace Swap.Rules.World
         private const string ENVIRONMENT_ROOT = "Environment";
         private const string OBJECTS_ROOT = "Objects";
 
-        private const string PLAYER_TAG = "Player";
+        private const string PLAYER_TAG = "PlayerSoul";
         private const string NON_PLAYER_TAG = "NonPlayerSoul";
         private const string ROBOT_BODY_TAG = "RobotBody";
         private const string BUTTON_TAG = "Button";

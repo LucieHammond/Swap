@@ -14,5 +14,7 @@ namespace Swap.Components
         public Transform ObjectRoot;
 
         public CharacterController Controller;
+
+        public Collider Collider;
     }
 }

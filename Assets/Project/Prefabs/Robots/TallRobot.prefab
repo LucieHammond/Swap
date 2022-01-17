@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3623777902977099813}
   - component: {fileID: -277369278946494871}
   - component: {fileID: 1812433482163121073}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: TallRobot
   m_TagString: RobotBody
   m_Icon: {fileID: 0}
@@ -53,6 +53,7 @@ MonoBehaviour:
   InteractRoot: {fileID: 1579726706683161874}
   ObjectRoot: {fileID: 7550634302185069035}
   Controller: {fileID: 1812433482163121073}
+  Collider: {fileID: 5490156939638694683}
 --- !u!143 &1812433482163121073
 CharacterController:
   m_ObjectHideFlags: 0
@@ -143,7 +144,7 @@ GameObject:
   - component: {fileID: 5861436594449803497}
   - component: {fileID: 8555984760742550563}
   - component: {fileID: 5490156939638694683}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: robot_tall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3995347230033924727}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SoulRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

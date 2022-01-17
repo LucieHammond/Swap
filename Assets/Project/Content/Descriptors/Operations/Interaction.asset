@@ -17,4 +17,4 @@ MonoBehaviour:
   CheckRadius: 1.15
   CheckRaycastLayers:
     serializedVersion: 2
-    m_Bits: 1025
+    m_Bits: 513

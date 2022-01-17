@@ -15,7 +15,7 @@ MonoBehaviour:
   ContentId: 
   VisibleLayers:
     serializedVersion: 2
-    m_Bits: 1217
+    m_Bits: 769
   TargetRadius: 0.035
   TargetOffset: {x: 0, y: 0.05, z: 0}
   SwapSpeed: 10

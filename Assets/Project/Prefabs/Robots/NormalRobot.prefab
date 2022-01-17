@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 1798680824990965405}
   - component: {fileID: -8973678765026330267}
   - component: {fileID: 6899993367805054324}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: NormalRobot
   m_TagString: RobotBody
   m_Icon: {fileID: 0}
@@ -83,6 +83,7 @@ MonoBehaviour:
   InteractRoot: {fileID: 491044180386955280}
   ObjectRoot: {fileID: 555639279138093660}
   Controller: {fileID: 6899993367805054324}
+  Collider: {fileID: 8016841803980611756}
 --- !u!143 &6899993367805054324
 CharacterController:
   m_ObjectHideFlags: 0
@@ -113,7 +114,7 @@ GameObject:
   - component: {fileID: 1062826297360777062}
   - component: {fileID: 2980008198749096876}
   - component: {fileID: 8016841803980611756}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: robot_normal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2147758803447964879}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SoulRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
