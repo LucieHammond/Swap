@@ -6,6 +6,11 @@ namespace Swap.Data.Descriptors
     [CreateAssetMenu(fileName = "NewCameraDescriptor", menuName = "Content/Game/Camera Descriptor", order = 120)]
     public class CameraDescriptor : ContentDescriptor
     {
+        [Header("Follow")]
+        public Vector3 FollowTarget;
+
+        public float FollowDistance;
+
         [Header("Vertical Angle")]
         public float AngularSpeed;
 

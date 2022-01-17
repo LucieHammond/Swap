@@ -22,6 +22,7 @@ namespace Swap.Rules.Controls
         private CameraDescriptor m_Descriptor;
 
         private CinemachineVirtualCamera m_Camera;
+        private Cinemachine3rdPersonFollow m_CameraFollow;
         private Transform m_CameraTarget;
 
         #region GameRule cycle
@@ -30,7 +31,9 @@ namespace Swap.Rules.Controls
             m_Descriptor = ContentService.GetContentDescriptor<CameraDescriptor>("Camera");
 
             m_Camera = LevelRule.GetCamera().GetComponent<CinemachineVirtualCamera>();
-            m_CameraTarget = m_Camera.Follow.parent;
+            m_CameraFollow = m_Camera.GetCinemachineComponent(CinemachineCore.Stage.Body) as Cinemachine3rdPersonFollow;
+            m_CameraTarget = m_Camera.Follow;
+
             m_Camera.enabled = true;
 
             MarkInitialized();
@@ -64,7 +67,12 @@ namespace Swap.Rules.Controls
             if (targetPitch > 180f) targetPitch -= 360f;
             targetPitch = Mathf.Clamp(targetPitch, m_Descriptor.MinDownAngle, m_Descriptor.MaxUpAngle);
 
+            float heightTarget = m_Descriptor.FollowTarget.y / Mathf.Cos(targetPitch * Mathf.Deg2Rad);
+            float cameraDistance = m_Descriptor.FollowDistance - m_Descriptor.FollowTarget.y * Mathf.Tan(targetPitch * Mathf.Deg2Rad);
+
             m_CameraTarget.rotation = Quaternion.Euler(targetPitch, m_CameraTarget.eulerAngles.y, 0.0f);
+            m_CameraTarget.localPosition.Set(m_Descriptor.FollowTarget.x, heightTarget, m_Descriptor.FollowTarget.z);
+            m_CameraFollow.CameraDistance = cameraDistance;
         }
 
         private void ZoomCamera()

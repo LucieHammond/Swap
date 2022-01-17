@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Camera
   m_EditorClassIdentifier: 
   ContentId: 
+  FollowTarget: {x: 0, y: 0.5, z: -0.1}
+  FollowDistance: 1.85
   AngularSpeed: 17.5
   MinDownAngle: -50
-  MaxUpAngle: 60
+  MaxUpAngle: 55
   ZoomSpeed: 8
   MinFieldOfView: 15
   MaxFieldOfView: 50
