@@ -554,7 +554,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 864f013069175d7488953af965ea92ed, type: 3}
 --- !u!4 &97844671 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 2865650206161909377, guid: 864f013069175d7488953af965ea92ed, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4802226440653445634, guid: 864f013069175d7488953af965ea92ed, type: 3}
   m_PrefabInstance: {fileID: 97844670}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &98685384
@@ -1568,34 +1568,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 924723657}
     m_Modifications:
-    - target: {fileID: 675430823522573141, guid: 3d37239b8923b164b819af82e004cf76, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 675430823522573141, guid: 3d37239b8923b164b819af82e004cf76, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 675430823522573141, guid: 3d37239b8923b164b819af82e004cf76, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 675430823522573141, guid: 3d37239b8923b164b819af82e004cf76, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 675430823522573141, guid: 3d37239b8923b164b819af82e004cf76, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 675430823522573141, guid: 3d37239b8923b164b819af82e004cf76, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 675430823522573141, guid: 3d37239b8923b164b819af82e004cf76, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1218280694526183161, guid: 3d37239b8923b164b819af82e004cf76, type: 3}
       propertyPath: m_Name
       value: GemStone
@@ -2825,7 +2797,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1798680824990965405, guid: 15db8aa433a266f48825543db7c49ca3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.5
+      value: -6.5
       objectReference: {fileID: 0}
     - target: {fileID: 1798680824990965405, guid: 15db8aa433a266f48825543db7c49ca3, type: 3}
       propertyPath: m_LocalRotation.w
