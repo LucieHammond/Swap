@@ -51,6 +51,8 @@ namespace Swap.Rules.Controls
         {
             if (m_CurrentCharacter != null)
             {
+                m_IsGrounded = MotionRule.IsCurrentlyGrounded(m_CurrentCharacter, out _, out _);
+
                 ComputeHorizontalMovement();
                 ComputeVerticalMovement();
                 ComputeRotationalMovement();
@@ -78,7 +80,7 @@ namespace Swap.Rules.Controls
         private void ComputeHorizontalMovement()
         {
             Vector2 inputMove = ControllerRule.GetMoveValue();
-            bool isRunning = ControllerRule.IsRunning();
+            bool isRunning = ControllerRule.IsRunning() && m_IsGrounded;
             bool isStopped = inputMove == Vector2.zero;
 
             // Compute position change
@@ -108,8 +110,6 @@ namespace Swap.Rules.Controls
 
         private void ComputeVerticalMovement()
         {
-            m_IsGrounded = MotionRule.IsCurrentlyGrounded(m_CurrentCharacter, out _, out _);
-
             if (m_IsGrounded)
             {
                 if (ControllerRule.AskedJump() && m_JumpWaitingTime <= 0.0)

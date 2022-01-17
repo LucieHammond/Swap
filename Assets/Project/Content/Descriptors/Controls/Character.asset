@@ -21,6 +21,6 @@ MonoBehaviour:
   TurningTime: 0.16
   RotationSpeed: 17.5
   RotationThreshold: 0.01
-  JumpHeight: 0.78
+  JumpHeight: 0.37
   JumpCooldown: 0.05
-  JumpGravity: -12
+  JumpGravity: -10

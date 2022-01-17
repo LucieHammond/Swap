@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Motion
   m_EditorClassIdentifier: 
   ContentId: 
-  CharacterGravity: -12
+  CharacterGravity: -10
   FallSpeedOnGround: -2
   FallSpeedInAir: -50
-  GroundCheckOffset: {x: 0, y: 0.11, z: 0}
-  GroundCheckRadius: 0.22
+  GroundCheckOffset: {x: 0, y: 0.1, z: 0}
+  GroundCheckRadius: 0.2
   GroundLayers:
     serializedVersion: 2
     m_Bits: 1
