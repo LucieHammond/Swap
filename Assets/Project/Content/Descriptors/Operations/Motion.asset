@@ -23,3 +23,7 @@ MonoBehaviour:
     m_Bits: 1
   SlopeMinAngle: 15
   SlopeMaxAngle: 45
+  RepulsionMargin: 0.05
+  RepulsionMinHeight: 0.1
+  RepulsionSpeed: 4
+  RepulsionLinearFactor: 1.2

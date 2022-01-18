@@ -43,6 +43,7 @@ namespace Swap.Setups.Modes
 
             rules.AddRule(new MotionRule());
             rules.AddRule(new InteractionRule());
+            rules.AddRule(new RobotsRepulsionRule());
 
             rules.AddRule(new StartRule());
             rules.AddRule(new DefeatRule());
@@ -71,6 +72,7 @@ namespace Swap.Setups.Modes
 
                 typeof(MotionRule),
                 typeof(InteractionRule),
+                typeof(RobotsRepulsionRule),
 
                 typeof(DefeatRule),
                 typeof(VictoryRule),
@@ -95,6 +97,7 @@ namespace Swap.Setups.Modes
                 new RuleScheduling(typeof(DoorOpeningRule), 1, 0),
                 new RuleScheduling(typeof(PlatformMoveRule), 1, 0),
 
+                new RuleScheduling(typeof(RobotsRepulsionRule), 1, 0),
                 new RuleScheduling(typeof(MotionRule), 1, 0),
                 new RuleScheduling(typeof(InteractionRule), 1, 0),
 

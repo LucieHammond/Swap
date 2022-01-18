@@ -24,5 +24,14 @@ namespace Swap.Data.Descriptors
         public float SlopeMinAngle;
 
         public float SlopeMaxAngle;
+
+        [Header("Repulsion")]
+        public float RepulsionMargin;
+
+        public float RepulsionMinHeight;
+
+        public float RepulsionSpeed;
+
+        public float RepulsionLinearFactor;
     }
 }
