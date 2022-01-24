@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ContentId: 
   WalkSpeed: 2.4
-  RunSpeed: 5.5
+  RunSpeed: 5.3
   SpeedChangeRate: 10
   TargetSpeedDelta: 0.1
   ActivateTurn: 0
   TurningTime: 0.16
-  RotationSpeed: 17.5
+  RotationSpeed: 1.75
   RotationThreshold: 0.01
   JumpHeight: 0.37
   JumpCooldown: 0.05

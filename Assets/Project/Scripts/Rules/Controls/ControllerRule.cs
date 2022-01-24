@@ -72,7 +72,6 @@ namespace Swap.Rules.Controls
 
         public Vector2 GetLookValue()
         {
-            
             return m_Look;
         }
 
