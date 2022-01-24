@@ -4153,6 +4153,10 @@ PrefabInstance:
       value: Platform1x2
       objectReference: {fileID: 0}
     - target: {fileID: 4335720508159509085, guid: cbbb5f78dab980a41a788117b42a788a, type: 3}
+      propertyPath: SignalsToListen.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4335720508159509085, guid: cbbb5f78dab980a41a788117b42a788a, type: 3}
       propertyPath: SignalsToListen.Array.data[0]
       value: 0
       objectReference: {fileID: 0}
