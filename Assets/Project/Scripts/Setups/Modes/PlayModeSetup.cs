@@ -11,6 +11,7 @@ using Swap.Rules.Mechanics;
 using Swap.Rules.Operations;
 using Swap.Rules.Skills;
 using Swap.Rules.World;
+using Swap.Setups.Transitions;
 using System;
 using System.Collections.Generic;
 
@@ -29,9 +30,9 @@ namespace Swap.Setups.Modes
             rules.AddRule(new LevelRule());
             rules.AddRule(new LogicRule());
 
-            rules.AddRule(new CameraRule());
-            rules.AddRule(new CharacterRule());
             rules.AddRule(new ControllerRule());
+            rules.AddRule(new CharacterRule());
+            rules.AddRule(new CameraRule());
 
             rules.AddRule(new SwapRule());
 
@@ -45,7 +46,6 @@ namespace Swap.Setups.Modes
             rules.AddRule(new InteractionRule());
             rules.AddRule(new RobotsRepulsionRule());
 
-            rules.AddRule(new StartRule());
             rules.AddRule(new DefeatRule());
             rules.AddRule(new VictoryRule());
         }
@@ -54,13 +54,12 @@ namespace Swap.Setups.Modes
         {
             return new List<Type>()
             {
-                typeof(StartRule),
-
                 typeof(LevelRule),
                 typeof(LogicRule),
 
                 typeof(ControllerRule),
                 typeof(CharacterRule),
+                typeof(CameraRule),
 
                 typeof(SwapRule),
 
@@ -76,8 +75,6 @@ namespace Swap.Setups.Modes
 
                 typeof(DefeatRule),
                 typeof(VictoryRule),
-
-                typeof(CameraRule)
             };
         }
 
@@ -101,7 +98,6 @@ namespace Swap.Setups.Modes
                 new RuleScheduling(typeof(MotionRule), 1, 0),
                 new RuleScheduling(typeof(InteractionRule), 1, 0),
 
-                new RuleScheduling(typeof(StartRule), 1, 0),
                 new RuleScheduling(typeof(DefeatRule), 1, 0),
                 new RuleScheduling(typeof(VictoryRule), 1, 0)
             };
@@ -152,7 +148,7 @@ namespace Swap.Setups.Modes
 
         public Transition GetTransition()
         {
-            return null;
+            return new LevelTransition();
         }
     }
 }

@@ -34,15 +34,11 @@ namespace Swap.Rules.Controls
             m_CameraFollow = m_Camera.GetCinemachineComponent(CinemachineCore.Stage.Body) as Cinemachine3rdPersonFollow;
             m_CameraTarget = m_Camera.Follow;
 
-            m_Camera.enabled = true;
-
             MarkInitialized();
         }
 
         protected override void Unload()
         {
-            m_Camera.enabled = false;
-
             MarkUnloaded();
         }
 
