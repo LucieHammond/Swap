@@ -4453,6 +4453,10 @@ PrefabInstance:
       value: Platform1x1
       objectReference: {fileID: 0}
     - target: {fileID: 1312637295609134012, guid: 9991b5319d9ca9d4a94b52118de9e306, type: 3}
+      propertyPath: MovementDuration
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1312637295609134012, guid: 9991b5319d9ca9d4a94b52118de9e306, type: 3}
       propertyPath: TranslationalMotion.y
       value: 3
       objectReference: {fileID: 0}

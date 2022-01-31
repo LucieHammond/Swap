@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Swap.Data.Descriptors
 {
-    [CreateAssetMenu(fileName = "NewMotionDescriptor", menuName = "Content/Game/Motion Descriptor", order = 122)]
+    [CreateAssetMenu(fileName = "NewMotionDescriptor", menuName = "Content/Game/Motion Descriptor", order = 142)]
     public class MotionDescriptor : ContentDescriptor
     {
         [Header("Gravity")]

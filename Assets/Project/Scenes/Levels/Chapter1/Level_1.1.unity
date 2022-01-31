@@ -2337,7 +2337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1312637295609134012, guid: 9991b5319d9ca9d4a94b52118de9e306, type: 3}
       propertyPath: MovementDuration
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 1312637295609134012, guid: 9991b5319d9ca9d4a94b52118de9e306, type: 3}
       propertyPath: TranslationalMotion.z

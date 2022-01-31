@@ -516,7 +516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1312637295609134012, guid: 9991b5319d9ca9d4a94b52118de9e306, type: 3}
       propertyPath: MovementDuration
-      value: 12
+      value: 10.5
       objectReference: {fileID: 0}
     - target: {fileID: 1312637295609134012, guid: 9991b5319d9ca9d4a94b52118de9e306, type: 3}
       propertyPath: TranslationalMotion.z
@@ -1524,6 +1524,10 @@ PrefabInstance:
     - target: {fileID: 1312637295609134011, guid: 9991b5319d9ca9d4a94b52118de9e306, type: 3}
       propertyPath: m_Name
       value: Platform1x1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1312637295609134012, guid: 9991b5319d9ca9d4a94b52118de9e306, type: 3}
+      propertyPath: MovementDuration
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 1312637295609134012, guid: 9991b5319d9ca9d4a94b52118de9e306, type: 3}
       propertyPath: TranslationalMotion.z
@@ -3904,7 +3908,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &821815894
 Transform:
   m_ObjectHideFlags: 0
@@ -4438,6 +4442,10 @@ PrefabInstance:
     - target: {fileID: 1312637295609134011, guid: 9991b5319d9ca9d4a94b52118de9e306, type: 3}
       propertyPath: m_Name
       value: Platform1x1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1312637295609134012, guid: 9991b5319d9ca9d4a94b52118de9e306, type: 3}
+      propertyPath: MovementDuration
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 1312637295609134012, guid: 9991b5319d9ca9d4a94b52118de9e306, type: 3}
       propertyPath: TranslationalMotion.z

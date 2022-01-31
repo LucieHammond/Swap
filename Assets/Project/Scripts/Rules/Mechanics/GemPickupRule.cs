@@ -6,6 +6,7 @@ using Swap.Components;
 using Swap.Data.Descriptors;
 using Swap.Data.Models;
 using Swap.Interfaces;
+using System.Linq;
 using UnityEngine;
 
 namespace Swap.Rules.Mechanics
@@ -114,9 +115,13 @@ namespace Swap.Rules.Mechanics
 
         private void TakeControlOfGem(GemStone gemStone, RobotBody robotHoldingGem)
         {
+            RobotBody currentOwner = m_LevelState.CurrentlyHeldGems.FirstOrDefault(p => p.Value == gemStone).Key;
+            if (currentOwner != null) m_LevelState.CurrentlyHeldGems[currentOwner] = null;
+            
             m_LevelState.CurrentlyHeldGems[robotHoldingGem] = gemStone;
             gemStone.transform.SetParent(robotHoldingGem.ObjectRoot, true);
             gemStone.RigidBody.isKinematic = true;
+            gemStone.Interactivity.Collider.isTrigger = true;
         }
 
         private void ReleaseControlOfGem(GemStone gemStone, RobotBody robotHoldingGem)
@@ -124,6 +129,7 @@ namespace Swap.Rules.Mechanics
             m_LevelState.CurrentlyHeldGems[robotHoldingGem] = null;
             gemStone.transform.SetParent(m_GemsRoot, true);
             gemStone.RigidBody.isKinematic = false;
+            gemStone.Interactivity.Collider.isTrigger = false;
         }
 
         private bool PerformGemRetrieval()

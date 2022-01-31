@@ -40,8 +40,7 @@ namespace Swap.Rules.Skills
         private Transform m_SwapArrival;
         private float m_SwapDuration;
         private float m_SwapProgression;
-
-        private Vector2 m_ScreenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
+        private Vector2 m_ScreenCenter;
 
         #region GameRule cycle
         protected override void Initialize()
@@ -64,6 +63,8 @@ namespace Swap.Rules.Skills
 
         protected override void Update()
         {
+            m_ScreenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
+
             if (m_IsSwapping)
             {
                 bool finished = PerformSwap();
