@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ContentId: 
   WalkSpeed: 2.4
-  RunSpeed: 5.3
+  RunSpeed: 5.5
   SpeedChangeRate: 10
   TargetSpeedDelta: 0.1
   ActivateTurn: 0
