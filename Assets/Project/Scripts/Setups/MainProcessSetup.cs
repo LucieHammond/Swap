@@ -1,6 +1,6 @@
 using GameEngine.PMR.Modules;
 using GameEngine.PMR.Process;
-using Swap.Setups.Modules;
+using Swap.Setups.Modes;
 using System.Collections.Generic;
 
 namespace Swap.Setups
@@ -11,14 +11,14 @@ namespace Swap.Setups
 
         public IGameModuleSetup GetServiceSetup()
         {
-            return new ServiceModuleSetup();
+            return new ServicesSetup();
         }
 
         public List<IGameModuleSetup> GetFirstGameModes()
         {
             return new List<IGameModuleSetup>()
             {
-                new LevelModuleSetup()
+                new PlayModeSetup()
             };
         }
     }

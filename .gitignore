@@ -84,3 +84,6 @@ crashlytics-build.properties
 # GameEngine user settings
 Assets/Packages/GameEngine/UserSettings/
 Assets/Packages/GameEngine/UserSettings.meta
+
+# AssetBundles folder
+Assets/StreamingAssets/Bundles/

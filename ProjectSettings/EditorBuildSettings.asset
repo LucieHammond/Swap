@@ -4,5 +4,39 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Project/Scenes/BootScene.unity
+    guid: df113c891db431546b3b828a125aadc4
+  - enabled: 1
+    path: Assets/Project/Scenes/Levels/Chapter1/Level_1.1.unity
+    guid: 3e79356a45e6dbc45b1d883cdf2aa3ce
+  - enabled: 1
+    path: Assets/Project/Scenes/Levels/Chapter1/Level_1.2.unity
+    guid: abf26d31ad2ffb340918d8c647404875
+  - enabled: 1
+    path: Assets/Project/Scenes/Levels/Chapter1/Level_1.4.unity
+    guid: 88bec94cf42442044bb8671e8cc41f0e
+  - enabled: 1
+    path: Assets/Project/Scenes/Levels/Chapter1/Level_1.5.unity
+    guid: a08f3e22f610c664eb183197472c3eae
+  - enabled: 1
+    path: Assets/Project/Scenes/Levels/Chapter1/Level_1.6.unity
+    guid: 51878b972694adf45a5cd535a72f73b1
+  - enabled: 1
+    path: Assets/Project/Scenes/Transitions/LevelTransition.unity
+    guid: 90da3116e109d9744b306a55f487dfbe
+  - enabled: 1
+    path: Assets/Project/Scenes/UI/DefeatUI.unity
+    guid: e0857585bab14154bb1aac0b18a97a71
+  - enabled: 1
+    path: Assets/Project/Scenes/UI/VictoryUI.unity
+    guid: 03fc89290fd9c13478c4f318977246d8
+  - enabled: 1
+    path: Assets/Project/Scenes/UI/SwapUI.unity
+    guid: de1bd8c723af65a4f82f9ae990a565cd
+  - enabled: 1
+    path: Assets/Project/Scenes/UI/InteractionUI.unity
+    guid: 92ce5ef182fdbea44952dc306aadeb6b
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: f20d38acde2d7774da4d6ecf756e7ca3, type: 2}
