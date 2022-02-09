@@ -1,32 +1,15 @@
 ﻿using GameEngine.PMR.Rules;
 using GameEngine.PMR.Rules.Dependencies;
 using Swap.Components;
+using Swap.Components.States;
 using Swap.Data.Models;
 using Swap.Interfaces;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Swap.Rules.Mechanics
 {
-    public class PlatformMoveRule : GameRule
+    public class MobilePlatformRule : GameRule
     {
-        private class PlatformInfo
-        {
-            public Vector3 PositionA;
-            public Vector3 RotationA;
-
-            public Vector3 PositionB;
-            public Vector3 RotationB;
-        }
-
-        private enum PlatformState
-        {
-            InPositionA,
-            InPositionB,
-            MovingFromAToB,
-            MovingFromBToA
-        }
-
         [RuleDependency(RuleDependencySource.SameModule, true)]
         public ILevelRule LevelRule;
 
@@ -39,43 +22,17 @@ namespace Swap.Rules.Mechanics
         private MobilePlatform[] m_MobilePlatforms;
         private RobotBody[] m_Robots;
 
-        private Dictionary<MobilePlatform, PlatformInfo> m_InitialInfos;
-        private Dictionary<MobilePlatform, PlatformState> m_CurrentStates;
-
-        public PlatformMoveRule()
-        {
-            m_InitialInfos = new Dictionary<MobilePlatform, PlatformInfo>();
-            m_CurrentStates = new Dictionary<MobilePlatform, PlatformState>();
-        }
-
         #region GameRule cycle
         protected override void Initialize()
         {
             m_MobilePlatforms = LevelRule.GetMobilePlatforms();
             m_Robots = LevelRule.GetRobotBodies();
 
-            foreach (MobilePlatform platform in m_MobilePlatforms)
-            {
-                PlatformInfo initialInfo = new PlatformInfo()
-                {
-                    PositionA = platform.transform.position,
-                    RotationA = platform.transform.eulerAngles,
-                    PositionB = platform.transform.position + platform.TranslationalMotion,
-                    RotationB = platform.transform.eulerAngles + platform.RotationalMotion
-                };
-
-                m_InitialInfos.Add(platform, initialInfo);
-                m_CurrentStates.Add(platform, PlatformState.InPositionA);
-            }
-
             MarkInitialized();
         }
 
         protected override void Unload()
         {
-            m_InitialInfos.Clear();
-            m_CurrentStates.Clear();
-
             MarkUnloaded();
         }
 
@@ -107,29 +64,29 @@ namespace Swap.Rules.Mechanics
         #region private
         private void UpdateWithInstantSwitch(MobilePlatform platform, bool signalValue)
         {
-            if ((m_CurrentStates[platform] == PlatformState.InPositionA && signalValue) 
-                || m_CurrentStates[platform] == PlatformState.MovingFromAToB)
+            if ((platform.State == MobilePlatformState.InPositionA && signalValue)
+                || platform.State == MobilePlatformState.MovingFromAToB)
             {
-                m_CurrentStates[platform] = MovePlatformTowardsB(platform, m_InitialInfos[platform]);
+                platform.SetState(MovePlatformTowardsB(platform));
             }
 
-            else if ((m_CurrentStates[platform] == PlatformState.InPositionB && signalValue)
-                || m_CurrentStates[platform] == PlatformState.MovingFromBToA)
+            else if ((platform.State == MobilePlatformState.InPositionB && signalValue)
+                || platform.State == MobilePlatformState.MovingFromBToA)
             {
-                m_CurrentStates[platform] = MovePlatformTowardsA(platform, m_InitialInfos[platform]);
+                platform.SetState(MovePlatformTowardsA(platform));
             }
         }
 
         private void UpdateWithStatusMatching(MobilePlatform platform, bool signalValue)
         {
-            if (m_CurrentStates[platform] != PlatformState.InPositionB && signalValue)
+            if (platform.State != MobilePlatformState.InPositionB && signalValue)
             {
-                m_CurrentStates[platform] = MovePlatformTowardsB(platform, m_InitialInfos[platform]);
+                platform.SetState(MovePlatformTowardsB(platform));
             }
 
-            else if (m_CurrentStates[platform] != PlatformState.InPositionA && !signalValue)
+            else if (platform.State != MobilePlatformState.InPositionA && !signalValue)
             {
-                m_CurrentStates[platform] = MovePlatformTowardsA(platform, m_InitialInfos[platform]);
+                platform.SetState(MovePlatformTowardsA(platform));
             }
         }
 
@@ -138,68 +95,68 @@ namespace Swap.Rules.Mechanics
             if (!signalValue)
                 return;
 
-            if (m_CurrentStates[platform] == PlatformState.InPositionA || m_CurrentStates[platform] == PlatformState.MovingFromAToB)
+            if (platform.State == MobilePlatformState.InPositionA || platform.State == MobilePlatformState.MovingFromAToB)
             {
-                m_CurrentStates[platform] = MovePlatformTowardsB(platform, m_InitialInfos[platform]);
+                platform.SetState(MovePlatformTowardsB(platform));
             }
 
-            else if (m_CurrentStates[platform] == PlatformState.InPositionB || m_CurrentStates[platform] == PlatformState.MovingFromBToA)
+            else if (platform.State == MobilePlatformState.InPositionB || platform.State == MobilePlatformState.MovingFromBToA)
             {
-                m_CurrentStates[platform] = MovePlatformTowardsA(platform, m_InitialInfos[platform]);
+                platform.SetState(MovePlatformTowardsA(platform));
             }
         }
 
         private void UpdateWithPermanentCompletion(MobilePlatform platform, bool signalValue)
         {
-            if (m_CurrentStates[platform] == PlatformState.InPositionB)
+            if (platform.State == MobilePlatformState.InPositionB)
                 return;
 
-            if ((m_CurrentStates[platform] == PlatformState.InPositionA && signalValue)
-                || m_CurrentStates[platform] == PlatformState.MovingFromAToB)
+            if ((platform.State == MobilePlatformState.InPositionA && signalValue)
+                || platform.State == MobilePlatformState.MovingFromAToB)
             {
-                m_CurrentStates[platform] = MovePlatformTowardsB(platform, m_InitialInfos[platform]);
+                platform.SetState(MovePlatformTowardsB(platform));
             }
         }
 
-        private PlatformState MovePlatformTowardsA(MobilePlatform platform, PlatformInfo info)
+        private MobilePlatformState MovePlatformTowardsA(MobilePlatform platform)
         {
             Vector3 positionDiff = -platform.TranslationalMotion * m_Time.DeltaTime / platform.MovementDuration;
             Vector3 rotationDiff = -platform.RotationalMotion * m_Time.DeltaTime / platform.MovementDuration;
             ApplyMoveToRobots(platform, positionDiff, rotationDiff);
 
-            if (positionDiff.magnitude < Vector3.Distance(platform.transform.position, info.PositionA)
-                || rotationDiff.magnitude < Quaternion.Angle(platform.transform.rotation, Quaternion.Euler(info.RotationA)))
+            if (positionDiff.magnitude < Vector3.Distance(platform.transform.position, platform.PositionA)
+                || rotationDiff.magnitude < Quaternion.Angle(platform.transform.rotation, Quaternion.Euler(platform.RotationA)))
             {
                 platform.transform.position += positionDiff;
                 platform.transform.eulerAngles += rotationDiff;
-                return PlatformState.MovingFromBToA;
+                return MobilePlatformState.MovingFromBToA;
             }
             else
             {
-                platform.transform.position = info.PositionA;
-                platform.transform.eulerAngles = info.RotationA;
-                return PlatformState.InPositionA;
+                platform.transform.position = platform.PositionA;
+                platform.transform.eulerAngles = platform.RotationA;
+                return MobilePlatformState.InPositionA;
             }
         }
 
-        private PlatformState MovePlatformTowardsB(MobilePlatform platform, PlatformInfo info)
+        private MobilePlatformState MovePlatformTowardsB(MobilePlatform platform)
         {
             Vector3 positionDiff = platform.TranslationalMotion * m_Time.DeltaTime / platform.MovementDuration;
             Vector3 rotationDiff = platform.RotationalMotion * m_Time.DeltaTime / platform.MovementDuration;
             ApplyMoveToRobots(platform, positionDiff, rotationDiff);
 
-            if (positionDiff.magnitude < Vector3.Distance(platform.transform.position, info.PositionB)
-                || rotationDiff.magnitude < Quaternion.Angle(platform.transform.rotation, Quaternion.Euler(info.RotationB)))
+            if (positionDiff.magnitude < Vector3.Distance(platform.transform.position, platform.PositionB)
+                || rotationDiff.magnitude < Quaternion.Angle(platform.transform.rotation, Quaternion.Euler(platform.RotationB)))
             {
                 platform.transform.position += positionDiff;
                 platform.transform.eulerAngles += rotationDiff;
-                return PlatformState.MovingFromAToB;
+                return MobilePlatformState.MovingFromAToB;
             }
             else
             {
-                platform.transform.position = info.PositionB;
-                platform.transform.eulerAngles = info.RotationB;
-                return PlatformState.InPositionB;
+                platform.transform.position = platform.PositionB;
+                platform.transform.eulerAngles = platform.RotationB;
+                return MobilePlatformState.InPositionB;
             }
         }
 
