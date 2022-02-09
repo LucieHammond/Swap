@@ -31,13 +31,13 @@ namespace Swap.Setups.Transitions
         {
             bool replay = m_ModuleConfiguration.Get<bool>("replay");
             string levelName = m_ModuleConfiguration.Get<LevelDescriptor>("level").Name;
-            
+
             if (!replay)
             {
                 SetTransitionTimes(2.0f, 0.4f, 1.2f);
                 m_LevelTitle.enabled = true;
                 m_LevelTitle.text = levelName.ToUpper();
-            }   
+            }
             else
             {
                 SetTransitionTimes(0f, 0f, 0.8f);

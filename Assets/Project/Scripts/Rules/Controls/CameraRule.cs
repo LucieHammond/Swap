@@ -42,7 +42,7 @@ namespace Swap.Rules.Controls
             MarkUnloaded();
         }
 
-        protected override void Update() 
+        protected override void Update()
         {
             RotateCamera();
             ZoomCamera();
@@ -58,7 +58,7 @@ namespace Swap.Rules.Controls
 
             float targetRotation = inputRotation * m_Descriptor.AngularSpeed;
             float targetPitch = m_CameraTarget.eulerAngles.x + targetRotation;
-            
+
             if (targetPitch < -180f) targetPitch += 360f;
             if (targetPitch > 180f) targetPitch -= 360f;
             targetPitch = Mathf.Clamp(targetPitch, m_Descriptor.MinDownAngle, m_Descriptor.MaxUpAngle);

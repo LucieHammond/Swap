@@ -17,7 +17,7 @@ namespace Swap.Rules.Controls
         private Vector2 m_Look;
         private bool m_Run;
         private float m_Zoom;
-        
+
         // Buttons
         private bool m_TriggerJump;
         private bool m_TriggerInteract;

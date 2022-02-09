@@ -43,7 +43,7 @@ namespace Swap.Rules.Events
         private Vector3 m_LastPosition;
         private Quaternion m_LastRotation;
         private float m_AttractProgression;
-        
+
 
         #region GameRule cycle
         protected override void Initialize()

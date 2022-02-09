@@ -36,7 +36,7 @@ namespace Swap.Rules.Services
                 Log.Error(TAG, "The main quest does not contain any levels");
                 MarkError();
             }
-                
+
             SetPlaymodeConfiguration(false);
             MarkInitialized();
         }

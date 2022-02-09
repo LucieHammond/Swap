@@ -62,7 +62,7 @@ namespace Swap.Rules.World
                 return;
 
             m_SignalValues[signalId] = true;
-            
+
             m_InstantSignals.Add(signalId);
         }
 
@@ -74,7 +74,7 @@ namespace Swap.Rules.World
                 return;
 
             m_SignalValues[signalId] = status;
-            
+
             if (status) m_StatusSignals.Add(signalId); else m_StatusSignals.Remove(signalId);
             m_InstantSignals.Remove(signalId);
         }
@@ -85,7 +85,7 @@ namespace Swap.Rules.World
                 return;
 
             m_SignalValues[signalId] = positive;
-            
+
             m_PermanentSignals.Add(signalId);
             m_StatusSignals.Remove(signalId);
             m_InstantSignals.Remove(signalId);
