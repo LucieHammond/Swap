@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4894593951623843305}
   m_Layer: 0
-  m_Name: ObjectRoot
+  m_Name: ReceptionPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,7 +160,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Color: 0
   SignalToSend: 0
-  ObjectRoot: {fileID: 4894593951623843305}
+  ReceptionPoint: {fileID: 4894593951623843305}
+  ActivationRadius: 0.02
 --- !u!64 &2017800510757590694
 MeshCollider:
   m_ObjectHideFlags: 0

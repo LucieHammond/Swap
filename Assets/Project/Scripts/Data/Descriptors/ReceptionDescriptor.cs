@@ -11,10 +11,13 @@ namespace Swap.Data.Descriptors
 
         public float ConnectionRadius;
 
-        [Header("Movement")]
+        [Header("Attraction")]
         public Vector3 AttractionCenter;
 
         public float AttractionSpeed;
+
+        [Header("Insertion")]
+        public Vector3 InsertionCenter;
 
         public float InsertionSpeed;
 

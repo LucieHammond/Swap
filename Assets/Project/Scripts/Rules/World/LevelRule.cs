@@ -77,7 +77,7 @@ namespace Swap.Rules.World
                 .Select((gameObject) => gameObject.GetComponent<GemStone>().Setup()).ToArray();
 
             m_GemReceptacles = GameObject.FindGameObjectsWithTag(GEM_RECEPTACLE_TAG)
-                .Select((gameObject) => gameObject.GetComponent<GemReceptacle>()).ToArray();
+                .Select((gameObject) => gameObject.GetComponent<GemReceptacle>().Setup()).ToArray();
 
             m_Doors = GameObject.FindGameObjectsWithTag(DOOR_TAG)
                 .Select((gameObject) => gameObject.GetComponent<Door>()).ToArray();
