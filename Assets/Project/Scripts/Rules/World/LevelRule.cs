@@ -74,7 +74,7 @@ namespace Swap.Rules.World
                 .Select((gameObject) => gameObject.GetComponent<Button>().Setup()).ToArray();
 
             m_GemStones = GameObject.FindGameObjectsWithTag(GEM_STONE_TAG)
-                .Select((gameObject) => gameObject.GetComponent<GemStone>()).ToArray();
+                .Select((gameObject) => gameObject.GetComponent<GemStone>().Setup()).ToArray();
 
             m_GemReceptacles = GameObject.FindGameObjectsWithTag(GEM_RECEPTACLE_TAG)
                 .Select((gameObject) => gameObject.GetComponent<GemReceptacle>()).ToArray();
@@ -84,6 +84,8 @@ namespace Swap.Rules.World
 
             m_MobilePlatforms = GameObject.FindGameObjectsWithTag(MOBILE_PLATFORM_TAG)
                 .Select((gameObject) => gameObject.GetComponent<MobilePlatform>()).ToArray();
+
+            GemStone.SetupRoot(m_ObjectsRoot);
 
             MarkInitialized();
         }

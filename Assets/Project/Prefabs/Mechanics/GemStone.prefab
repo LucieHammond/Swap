@@ -107,7 +107,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218280694526183161}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -129,10 +129,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Color: 0
   RigidBody: {fileID: 2011066715833898121}
-  Interactivity:
-    CenterOffset: {x: 0, y: 0, z: 0}
-    MarkerDistance: 0.25
-    Collider: {fileID: 7247058178299975395}
+  Collider: {fileID: 7247058178299975395}
+  InitiallyActive: 1
+  MarkerDistance: 0.25
+  BaseRotation: {x: 3, y: 0, z: 0}
 --- !u!64 &7247058178299975395
 MeshCollider:
   m_ObjectHideFlags: 0
