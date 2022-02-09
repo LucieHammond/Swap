@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SignalsToListen: 00000000
   Animator: {fileID: -5940383353279552766}
+  OpenAnimBool: Open
 --- !u!95 &-5940383353279552766
 Animator:
   serializedVersion: 3

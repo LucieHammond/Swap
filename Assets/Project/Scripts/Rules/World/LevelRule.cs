@@ -80,7 +80,7 @@ namespace Swap.Rules.World
                 .Select((gameObject) => gameObject.GetComponent<GemReceptacle>().Setup()).ToArray();
 
             m_Doors = GameObject.FindGameObjectsWithTag(DOOR_TAG)
-                .Select((gameObject) => gameObject.GetComponent<Door>()).ToArray();
+                .Select((gameObject) => gameObject.GetComponent<Door>().Setup()).ToArray();
 
             m_MobilePlatforms = GameObject.FindGameObjectsWithTag(MOBILE_PLATFORM_TAG)
                 .Select((gameObject) => gameObject.GetComponent<MobilePlatform>()).ToArray();

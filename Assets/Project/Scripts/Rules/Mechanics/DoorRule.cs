@@ -5,7 +5,7 @@ using Swap.Interfaces;
 
 namespace Swap.Rules.Mechanics
 {
-    public class DoorOpeningRule : GameRule
+    public class DoorRule : GameRule
     {
         [RuleDependency(RuleDependencySource.SameModule, true)]
         public ILevelRule LevelRule;
@@ -32,8 +32,13 @@ namespace Swap.Rules.Mechanics
         {
             foreach (Door door in m_Doors)
             {
-                bool open = LogicRule.IsActiveAll(door.SignalsToListen);
-                door.Animator.SetBool("Open", open);
+                bool signalValue = LogicRule.IsActiveAll(door.SignalsToListen);
+
+                if (signalValue && !door.IsOpen)
+                    door.Open();
+
+                else if (!signalValue && door.IsOpen)
+                    door.Close();
             }
         }
         #endregion
