@@ -26,6 +26,7 @@ namespace Swap.Rules.World
         private const string GEM_STONE_TAG = "GemStone";
         private const string GEM_RECEPTACLE_TAG = "GemReceptacle";
         private const string DOOR_TAG = "Door";
+        private const string GENERATOR_TAG = "Generator";
         private const string MOBILE_PLATFORM_TAG = "MobilePlatform";
 
         public HashSet<string> RequiredScenes
@@ -56,6 +57,7 @@ namespace Swap.Rules.World
         private GemStone[] m_GemStones;
         private GemReceptacle[] m_GemReceptacles;
         private Door[] m_Doors;
+        private Generator[] m_Generators;
         private MobilePlatform[] m_MobilePlatforms;
 
         #region GameRule cycle
@@ -81,6 +83,9 @@ namespace Swap.Rules.World
 
             m_Doors = GameObject.FindGameObjectsWithTag(DOOR_TAG)
                 .Select((gameObject) => gameObject.GetComponent<Door>().Setup()).ToArray();
+
+            m_Generators = GameObject.FindGameObjectsWithTag(GENERATOR_TAG)
+                .Select((gameObject) => gameObject.GetComponent<Generator>().Setup()).ToArray();
 
             m_MobilePlatforms = GameObject.FindGameObjectsWithTag(MOBILE_PLATFORM_TAG)
                 .Select((gameObject) => gameObject.GetComponent<MobilePlatform>().Setup()).ToArray();
@@ -123,6 +128,8 @@ namespace Swap.Rules.World
         public GemReceptacle[] GetGemReceptacles() => m_GemReceptacles;
 
         public Door[] GetDoors() => m_Doors;
+
+        public Generator[] GetGenerators() => m_Generators;
 
         public MobilePlatform[] GetMobilePlatforms() => m_MobilePlatforms;
         #endregion

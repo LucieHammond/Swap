@@ -23,6 +23,8 @@ namespace Swap.Interfaces
 
         Door[] GetDoors();
 
+        Generator[] GetGenerators();
+
         MobilePlatform[] GetMobilePlatforms();
     }
 }

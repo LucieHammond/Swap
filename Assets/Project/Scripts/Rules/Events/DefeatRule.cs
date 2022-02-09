@@ -55,7 +55,7 @@ namespace Swap.Rules.Events
         {
             if (!m_GameOver)
             {
-                m_GameOver = CheckFallIntoVoid();
+                m_GameOver = CheckDeactivated() || CheckFallIntoVoid();
                 if (m_GameOver)
                     m_GameOverPanel.SetActive(true);
             }
@@ -69,6 +69,14 @@ namespace Swap.Rules.Events
         #endregion
 
         #region private
+        private bool CheckDeactivated()
+        {
+            if (m_Descriptor.ActivationRequired && m_PlayerSoul.CurrentRobotBody != null)
+                return !m_PlayerSoul.CurrentRobotBody.Active;
+
+            return false;
+        }
+
         private bool CheckFallIntoVoid()
         {
             return m_PlayerSoul.transform.position.y < m_Descriptor.MaxDepthThreshold;

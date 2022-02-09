@@ -7,6 +7,8 @@ namespace Swap.Data.Descriptors
     public class DefeatDescriptor : ContentDescriptor
     {
         [Header("Conditions")]
+        public bool ActivationRequired;
+
         public float MaxDepthThreshold;
 
         [Header("Display")]

@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc8cecafc591f9d4b8ca7cca8e821c11, type: 3}
-  m_Name: Defeat
+  m_Script: {fileID: 11500000, guid: 74cd0cb8cc5f53d4faf8e65f3a387409, type: 3}
+  m_Name: GeneratorSpawn
   m_EditorClassIdentifier: 
   ContentId: 
-  ActivationRequired: 1
-  MaxDepthThreshold: -30
-  DisplayTime: 2
+  DespawnTime: 0.1
+  SpawnTime: 0.4
