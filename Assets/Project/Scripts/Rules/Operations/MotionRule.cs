@@ -79,11 +79,14 @@ namespace Swap.Rules.Operations
         {
             foreach (RobotBody robot in m_Robots)
             {
-                CurrentMotion currentState = m_CurrentMotions[robot];
+                if (robot.Active)
+                {
+                    CurrentMotion currentState = m_CurrentMotions[robot];
 
-                currentState.IsGrounded = CheckIfGrounded(robot, out currentState.Ground, out currentState.Slope);
-                AdjustSpeed(robot, currentState.IsGrounded);
-                ApplyMotion(robot, out currentState.Velocity);
+                    currentState.IsGrounded = CheckIfGrounded(robot, out currentState.Ground, out currentState.Slope);
+                    AdjustSpeed(robot, currentState.IsGrounded);
+                    ApplyMotion(robot, out currentState.Velocity);
+                }
             }
         }
         #endregion
@@ -179,9 +182,9 @@ namespace Swap.Rules.Operations
                 ground = hit.collider;
 
                 float angle = 90f - Mathf.Acos(new Vector2(hit.normal.x, hit.normal.z).magnitude) * Mathf.Rad2Deg;
-                slope = angle >= m_Descriptor.SlopeMinAngle && angle <= m_Descriptor.SlopeMaxAngle ? angle: 0f;
+                slope = angle >= m_Descriptor.SlopeMinAngle && angle <= m_Descriptor.SlopeMaxAngle ? angle : 0f;
             }
-                
+
             return true;
         }
 

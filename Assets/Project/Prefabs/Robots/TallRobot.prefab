@@ -49,11 +49,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RobotType: 2
-  SoolRoot: {fileID: 3995347230033924727}
-  InteractRoot: {fileID: 1579726706683161874}
-  ObjectRoot: {fileID: 7550634302185069035}
+  SoulPoint: {fileID: 3995347230033924727}
+  InteractPoint: {fileID: 1579726706683161874}
+  ObjectPoint: {fileID: 7550634302185069035}
   Controller: {fileID: 1812433482163121073}
   Collider: {fileID: 5490156939638694683}
+  InitiallyActive: 1
 --- !u!143 &1812433482163121073
 CharacterController:
   m_ObjectHideFlags: 0
@@ -82,7 +83,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7550634302185069035}
   m_Layer: 2
-  m_Name: ObjectRoot
+  m_Name: ObjectPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,7 +113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1579726706683161874}
   m_Layer: 2
-  m_Name: InteractRoot
+  m_Name: InteractPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -238,7 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3995347230033924727}
   m_Layer: 2
-  m_Name: SoulRoot
+  m_Name: SoulPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -118,7 +118,7 @@ namespace Swap.Rules.Mechanics
             if (currentOwner != null) m_PlayerSoul.CurrentlyHeldGems[currentOwner] = null;
             
             m_PlayerSoul.CurrentlyHeldGems[robotHoldingGem] = gemStone;
-            gemStone.transform.SetParent(robotHoldingGem.ObjectRoot, true);
+            gemStone.transform.SetParent(robotHoldingGem.ObjectPoint, true);
             gemStone.RigidBody.isKinematic = true;
             gemStone.Collider.isTrigger = true;
         }
@@ -133,7 +133,7 @@ namespace Swap.Rules.Mechanics
 
         private bool PerformGemRetrieval()
         {
-            Vector3 retrievePosition = m_RobotHoldingGem.ObjectRoot.position;
+            Vector3 retrievePosition = m_RobotHoldingGem.ObjectPoint.position;
             Quaternion retrieveRotation = Quaternion.identity;
 
             return m_PickedGemStone.transform.MoveTowards(retrievePosition, retrieveRotation, m_Descriptor.RetrieveSpeed, m_Time.DeltaTime);
@@ -141,7 +141,7 @@ namespace Swap.Rules.Mechanics
 
         private bool PerformGemRelease()
         {
-            Vector3 releasePosition = m_RobotHoldingGem.ObjectRoot.position + m_RobotHoldingGem.ObjectRoot.rotation * m_Descriptor.ReleaseOffset;
+            Vector3 releasePosition = m_RobotHoldingGem.ObjectPoint.position + m_RobotHoldingGem.ObjectPoint.rotation * m_Descriptor.ReleaseOffset;
             Quaternion releaseRotation = Quaternion.Euler(m_Descriptor.ReleaseAngle);
 
             return m_PickedGemStone.transform.MoveTowards(releasePosition, releaseRotation, m_Descriptor.ReleaseSpeed, m_Time.DeltaTime);

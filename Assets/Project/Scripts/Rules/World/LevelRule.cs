@@ -65,10 +65,10 @@ namespace Swap.Rules.World
                 .GetComponent<PlayerSoul>().Setup();
 
             m_NonPlayerSouls = GameObject.FindGameObjectsWithTag(NON_PLAYER_TAG)
-                .Select((gameObject) => gameObject.GetComponent<NonPlayerSoul>()).ToArray();
+                .Select((gameObject) => gameObject.GetComponent<NonPlayerSoul>().Setup()).ToArray();
 
             m_Robots = GameObject.FindGameObjectsWithTag(ROBOT_BODY_TAG)
-                .Select((gameObject) => gameObject.GetComponent<RobotBody>()).ToArray();
+                .Select((gameObject) => gameObject.GetComponent<RobotBody>().Setup()).ToArray();
 
             m_Buttons = GameObject.FindGameObjectsWithTag(BUTTON_TAG)
                 .Select((gameObject) => gameObject.GetComponent<Button>().Setup()).ToArray();
