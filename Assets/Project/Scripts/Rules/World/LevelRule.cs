@@ -59,13 +59,11 @@ namespace Swap.Rules.World
         private Door[] m_Doors;
         private MobilePlatform[] m_MobilePlatforms;
 
-        private LevelState m_CurrentState;
-
         #region GameRule cycle
         protected override void Initialize()
         {
             m_PlayerSoul = GameObject.FindGameObjectWithTag(PLAYER_TAG)
-                .GetComponent<PlayerSoul>();
+                .GetComponent<PlayerSoul>().Setup();
 
             m_NonPlayerSouls = GameObject.FindGameObjectsWithTag(NON_PLAYER_TAG)
                 .Select((gameObject) => gameObject.GetComponent<NonPlayerSoul>()).ToArray();
@@ -88,19 +86,11 @@ namespace Swap.Rules.World
             m_MobilePlatforms = GameObject.FindGameObjectsWithTag(MOBILE_PLATFORM_TAG)
                 .Select((gameObject) => gameObject.GetComponent<MobilePlatform>()).ToArray();
 
-
-            m_CurrentState = new LevelState()
-            {
-                CurrentRobotBody = m_PlayerSoul.GetComponentInParent<RobotBody>(),
-                CurrentlyHeldGems = new Dictionary<RobotBody, GemStone>()
-            };
-
             MarkInitialized();
         }
 
         protected override void Unload()
         {
-            m_CurrentState = null;
             MarkUnloaded();
         }
 
@@ -116,8 +106,6 @@ namespace Swap.Rules.World
 
             return null;
         }
-
-        public LevelState GetLevelState() => m_CurrentState;
 
         public GameObject GetCamera() => m_Camera;
 

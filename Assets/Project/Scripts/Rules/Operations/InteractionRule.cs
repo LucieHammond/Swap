@@ -3,8 +3,8 @@ using GameEngine.PMR.Rules.Dependencies;
 using GameEngine.PMR.Unity.Basics.Content;
 using GameEngine.PMR.Unity.Rules;
 using GameEngine.PMR.Unity.Rules.Dependencies;
+using Swap.Components;
 using Swap.Data.Descriptors;
-using Swap.Data.Models;
 using Swap.Interfaces;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,7 +30,7 @@ namespace Swap.Rules.Operations
         private GameObject m_Marker;
         private Animator m_MarkerAnimator;
 
-        private LevelState m_LevelState;
+        private PlayerSoul m_PlayerSoul;
         private bool m_FoundInteraction;
         private bool m_IsMarkedInteraction;
         private bool m_IsNewInteraction;
@@ -42,7 +42,7 @@ namespace Swap.Rules.Operations
         {
             m_Descriptor = ContentService.GetContentDescriptor<InteractDescriptor>("Interaction");
 
-            m_LevelState = LevelRule.GetLevelState();
+            m_PlayerSoul = LevelRule.GetPlayerSoul();
             m_FoundInteraction = false;
             m_Marker = m_InteractionRoot.transform.Find("Marker").gameObject;
             m_MarkerAnimator = m_Marker.GetComponent<Animator>();
@@ -81,16 +81,16 @@ namespace Swap.Rules.Operations
         #endregion
 
         #region IInteractionRule API
-        public bool CheckCurrentInteraction<T>(GetCurrentElement<T> elementGetter, out T currentElement) where T : MonoBehaviour
+        public bool CheckPriorityInteraction<T>(GetPlayerElement<T> elementGetter, out T currentElement) where T : MonoBehaviour
         {
             currentElement = default;
             if (m_FoundInteraction)
                 return false;
 
-            if (m_LevelState.CurrentRobotBody == null)
+            if (m_PlayerSoul.CurrentRobotBody == null)
                 return false;
 
-            currentElement = elementGetter(m_LevelState);
+            currentElement = elementGetter(m_PlayerSoul);
             if (currentElement == null)
                 return false;
 
@@ -104,12 +104,12 @@ namespace Swap.Rules.Operations
             if (m_FoundInteraction)
                 return false;
 
-            if (m_LevelState.CurrentRobotBody == null)
+            if (m_PlayerSoul.CurrentRobotBody == null)
                 return false;
 
             float minDistance = float.MaxValue;
             Vector3 markerPosition = Vector3.zero;
-            Vector3 interactPosition = m_LevelState.CurrentRobotBody.InteractRoot.position;
+            Vector3 interactPosition = m_PlayerSoul.CurrentRobotBody.InteractRoot.position;
 
             foreach (T element in elements)
             {

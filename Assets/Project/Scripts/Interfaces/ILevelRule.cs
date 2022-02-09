@@ -1,5 +1,4 @@
 ﻿using Swap.Components;
-using Swap.Data.Models;
 using UnityEngine;
 
 namespace Swap.Interfaces
@@ -7,8 +6,6 @@ namespace Swap.Interfaces
     public interface ILevelRule
     {
         Transform GetRootTransform(string rootName);
-
-        LevelState GetLevelState();
 
         GameObject GetCamera();
 

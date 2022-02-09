@@ -27,7 +27,7 @@ namespace Swap.Rules.Mechanics
 
         private PickupDescriptor m_Descriptor;
 
-        private LevelState m_LevelState;
+        private PlayerSoul m_PlayerSoul;
         private GemStone[] m_GemStones;
         private Transform m_GemsRoot;
 
@@ -41,7 +41,7 @@ namespace Swap.Rules.Mechanics
         {
             m_Descriptor = ContentService.GetContentDescriptor<PickupDescriptor>("GemPickup");
 
-            m_LevelState = LevelRule.GetLevelState();
+            m_PlayerSoul = LevelRule.GetPlayerSoul();
             m_GemStones = LevelRule.GetGemStones();
             m_GemsRoot = LevelRule.GetRootTransform("Objects");
             m_IsRetrievingGem = false;
@@ -90,13 +90,13 @@ namespace Swap.Rules.Mechanics
                 {
                     m_IsReleasingGem = true;
                     m_PickedGemStone = interactingGemStone;
-                    m_RobotHoldingGem = m_LevelState.CurrentRobotBody;
+                    m_RobotHoldingGem = m_PlayerSoul.CurrentRobotBody;
                 }
                 else if (ControllerRule.AskedInteraction() && retrievePossible)
                 {
                     m_IsRetrievingGem = true;
                     m_PickedGemStone = interactingGemStone;
-                    m_RobotHoldingGem = m_LevelState.CurrentRobotBody;
+                    m_RobotHoldingGem = m_PlayerSoul.CurrentRobotBody;
 
                     TakeControlOfGem(m_PickedGemStone, m_RobotHoldingGem);
                 }
@@ -105,7 +105,7 @@ namespace Swap.Rules.Mechanics
         #endregion
 
         #region private
-        private GemStone GetCurrentGemStone(LevelState currentState)
+        private GemStone GetCurrentGemStone(PlayerSoul currentState)
         {
             if (currentState.CurrentlyHeldGems.TryGetValue(currentState.CurrentRobotBody, out GemStone gemStone))
                 return gemStone;
@@ -115,10 +115,10 @@ namespace Swap.Rules.Mechanics
 
         private void TakeControlOfGem(GemStone gemStone, RobotBody robotHoldingGem)
         {
-            RobotBody currentOwner = m_LevelState.CurrentlyHeldGems.FirstOrDefault(p => p.Value == gemStone).Key;
-            if (currentOwner != null) m_LevelState.CurrentlyHeldGems[currentOwner] = null;
+            RobotBody currentOwner = m_PlayerSoul.CurrentlyHeldGems.FirstOrDefault(p => p.Value == gemStone).Key;
+            if (currentOwner != null) m_PlayerSoul.CurrentlyHeldGems[currentOwner] = null;
             
-            m_LevelState.CurrentlyHeldGems[robotHoldingGem] = gemStone;
+            m_PlayerSoul.CurrentlyHeldGems[robotHoldingGem] = gemStone;
             gemStone.transform.SetParent(robotHoldingGem.ObjectRoot, true);
             gemStone.RigidBody.isKinematic = true;
             gemStone.Interactivity.Collider.isTrigger = true;
@@ -126,7 +126,7 @@ namespace Swap.Rules.Mechanics
 
         private void ReleaseControlOfGem(GemStone gemStone, RobotBody robotHoldingGem)
         {
-            m_LevelState.CurrentlyHeldGems[robotHoldingGem] = null;
+            m_PlayerSoul.CurrentlyHeldGems[robotHoldingGem] = null;
             gemStone.transform.SetParent(m_GemsRoot, true);
             gemStone.RigidBody.isKinematic = false;
             gemStone.Interactivity.Collider.isTrigger = false;

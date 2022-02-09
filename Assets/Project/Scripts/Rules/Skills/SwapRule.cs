@@ -4,7 +4,6 @@ using GameEngine.PMR.Unity.Basics.Content;
 using GameEngine.PMR.Unity.Rules;
 using Swap.Components;
 using Swap.Data.Descriptors;
-using Swap.Data.Models;
 using Swap.Interfaces;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,7 +31,6 @@ namespace Swap.Rules.Skills
         private Camera m_Camera;
         private PlayerSoul m_PlayerSoul;
         private NonPlayerSoul[] m_NonPlayerSouls;
-        private LevelState m_LevelState;
 
         private bool m_IsSwapping;
         private NonPlayerSoul m_PartnerSoul;
@@ -50,7 +48,6 @@ namespace Swap.Rules.Skills
             m_Camera = Camera.main;
             m_PlayerSoul = LevelRule.GetPlayerSoul();
             m_NonPlayerSouls = LevelRule.GetNonPlayerSouls();
-            m_LevelState = LevelRule.GetLevelState();
             m_IsSwapping = false;
 
             MarkInitialized();
@@ -139,7 +136,7 @@ namespace Swap.Rules.Skills
             m_PlayerSoul.transform.SetParent(null, true);
             m_PartnerSoul.transform.SetParent(null, true);
 
-            m_LevelState.CurrentRobotBody = null;
+            m_PlayerSoul.SetCurrentRobot(null);
             CharacterRule.ExitCharacter();
         }
 
@@ -174,8 +171,8 @@ namespace Swap.Rules.Skills
             m_PlayerSoul.transform.SetParent(m_SwapArrival, true);
             m_PartnerSoul.transform.SetParent(m_SwapStart, true);
 
-            m_LevelState.CurrentRobotBody = m_SwapArrival.GetComponentInParent<RobotBody>();
-            CharacterRule.EnterCharacter(m_LevelState.CurrentRobotBody);
+            m_PlayerSoul.SetCurrentRobot(m_SwapArrival.GetComponentInParent<RobotBody>());
+            CharacterRule.EnterCharacter(m_PlayerSoul.CurrentRobotBody);
 
             m_IsSwapping = false;
             m_PartnerSoul = null;

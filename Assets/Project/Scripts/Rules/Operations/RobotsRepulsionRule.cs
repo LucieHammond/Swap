@@ -3,7 +3,6 @@ using GameEngine.PMR.Rules.Dependencies;
 using GameEngine.PMR.Unity.Basics.Content;
 using Swap.Components;
 using Swap.Data.Descriptors;
-using Swap.Data.Models;
 using Swap.Interfaces;
 using UnityEngine;
 
@@ -22,16 +21,16 @@ namespace Swap.Rules.Operations
 
         private MotionDescriptor m_Descriptor;
 
+        private PlayerSoul m_PlayerSoul;
         private RobotBody[] m_Robots;
-        private LevelState m_LevelState;
 
         #region GameRule cycle
         protected override void Initialize()
         {
             m_Descriptor = ContentService.GetContentDescriptor<MotionDescriptor>("Motion");
 
+            m_PlayerSoul = LevelRule.GetPlayerSoul();
             m_Robots = LevelRule.GetRobotBodies();
-            m_LevelState = LevelRule.GetLevelState();
 
             MarkInitialized();
         }
@@ -61,7 +60,7 @@ namespace Swap.Rules.Operations
         {
             CharacterController controller1 = robot1.Controller;
             Bounds bounds1 = new Bounds(controller1.bounds.center, controller1.bounds.size + m_Descriptor.RepulsionMargin * Vector3.one);
-            
+
             CharacterController controller2 = robot2.Controller;
             Bounds bounds2 = new Bounds(controller2.bounds.center, controller2.bounds.size + m_Descriptor.RepulsionMargin * Vector3.one);
 
@@ -74,13 +73,13 @@ namespace Swap.Rules.Operations
                 distance = controller1.radius + controller2.radius + m_Descriptor.RepulsionMargin - horizontalDistance.magnitude;
                 if (distance > 0)
                 {
-                    if (verticalDistance >= m_Descriptor.RepulsionMinHeight || robot1 == m_LevelState.CurrentRobotBody)
+                    if (verticalDistance >= m_Descriptor.RepulsionMinHeight || robot1 == m_PlayerSoul.CurrentRobotBody)
                     {
                         repulsedRobot = robot1;
                         direction = horizontalDistance.magnitude > 0 ? horizontalDistance.normalized : Vector3.forward;
                         return true;
                     }
-                    else if (verticalDistance <= -m_Descriptor.RepulsionMinHeight || robot2 == m_LevelState.CurrentRobotBody)
+                    else if (verticalDistance <= -m_Descriptor.RepulsionMinHeight || robot2 == m_PlayerSoul.CurrentRobotBody)
                     {
                         repulsedRobot = robot2;
                         direction = horizontalDistance.magnitude > 0 ? -horizontalDistance.normalized : Vector3.forward;
