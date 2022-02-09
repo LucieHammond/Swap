@@ -4,9 +4,11 @@ using GameEngine.PMR.Unity.Basics.Content;
 using GameEngine.PMR.Unity.Rules;
 using GameEngine.PMR.Unity.Rules.Dependencies;
 using Swap.Components;
+using Swap.Components.Template;
 using Swap.Data.Descriptors;
 using Swap.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Swap.Rules.Operations
@@ -27,10 +29,10 @@ namespace Swap.Rules.Operations
 
         private InteractDescriptor m_Descriptor;
 
+        private PlayerSoul m_PlayerSoul;
         private GameObject m_Marker;
         private Animator m_MarkerAnimator;
 
-        private PlayerSoul m_PlayerSoul;
         private bool m_FoundInteraction;
         private bool m_IsMarkedInteraction;
         private bool m_IsNewInteraction;
@@ -81,7 +83,7 @@ namespace Swap.Rules.Operations
         #endregion
 
         #region IInteractionRule API
-        public bool CheckPriorityInteraction<T>(GetPlayerElement<T> elementGetter, out T currentElement) where T : MonoBehaviour
+        public bool CheckPriorityInteraction<T>(GetPlayerElement<T> elementGetter, out T currentElement) where T : MonoBehaviour, IInteractive
         {
             currentElement = default;
             if (m_FoundInteraction)
@@ -91,14 +93,14 @@ namespace Swap.Rules.Operations
                 return false;
 
             currentElement = elementGetter(m_PlayerSoul);
-            if (currentElement == null)
+            if (currentElement == null || !currentElement.IsAvailable())
                 return false;
 
             RegisterInteractionForFrame(currentElement.gameObject, false);
             return true;
         }
 
-        public bool FindEligibleInteraction<T>(IEnumerable<T> elements, GetInteractivity<T> interactionGetter, out T eligibleElement) where T : MonoBehaviour
+        public bool FindEligibleInteraction<T>(IEnumerable<T> elements, out T eligibleElement) where T : MonoBehaviour, IInteractive
         {
             eligibleElement = default;
             if (m_FoundInteraction)
@@ -109,12 +111,11 @@ namespace Swap.Rules.Operations
 
             float minDistance = float.MaxValue;
             Vector3 markerPosition = Vector3.zero;
-            Vector3 interactPosition = m_PlayerSoul.CurrentRobotBody.InteractRoot.position;
+            Vector3 interactPosition = m_PlayerSoul.CurrentRobotBody.InteractPoint.position;
 
-            foreach (T element in elements)
+            foreach (T element in elements.Where((element) => element.IsAvailable()))
             {
-                Interactivity interactivity = interactionGetter.Invoke(element);
-                Vector3 elementPosition = element.transform.position + element.transform.rotation * interactivity.CenterOffset;
+                Vector3 elementPosition = element.GetInteractionCenter();
 
                 float horizontalDistance = Vector3.Distance(new Vector3(elementPosition.x, interactPosition.y, elementPosition.z), interactPosition);
                 if (horizontalDistance > m_Descriptor.CheckRadius)
@@ -125,14 +126,14 @@ namespace Swap.Rules.Operations
                     continue;
 
                 if (!Physics.Raycast(interactPosition, elementPosition - interactPosition, out RaycastHit hit, float.MaxValue, m_Descriptor.CheckRaycastLayers)
-                    || hit.collider != interactivity.Collider)
+                    || !element.ReceiveInteractionRay(hit))
                     continue;
 
                 if (horizontalDistance < minDistance)
                 {
                     minDistance = horizontalDistance;
                     eligibleElement = element;
-                    markerPosition = elementPosition + interactivity.MarkerDistance * Vector3.up;
+                    markerPosition = element.GetMarkerPosition();
                 }
             }
 
@@ -142,6 +143,8 @@ namespace Swap.Rules.Operations
             RegisterInteractionForFrame(eligibleElement.gameObject, true, markerPosition);
             return true;
         }
+
+
         #endregion
 
         #region private

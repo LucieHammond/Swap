@@ -5,7 +5,6 @@ using GameEngine.PMR.Unity.Rules;
 using GameEngine.PMR.Unity.Rules.Dependencies;
 using Swap.Components;
 using Swap.Data.Descriptors;
-using Swap.Data.Models;
 using Swap.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,12 +66,12 @@ namespace Swap.Rules.World
 
             m_NonPlayerSouls = GameObject.FindGameObjectsWithTag(NON_PLAYER_TAG)
                 .Select((gameObject) => gameObject.GetComponent<NonPlayerSoul>()).ToArray();
-            
+
             m_Robots = GameObject.FindGameObjectsWithTag(ROBOT_BODY_TAG)
                 .Select((gameObject) => gameObject.GetComponent<RobotBody>()).ToArray();
 
             m_Buttons = GameObject.FindGameObjectsWithTag(BUTTON_TAG)
-                .Select((gameObject) => gameObject.GetComponent<Button>()).ToArray();
+                .Select((gameObject) => gameObject.GetComponent<Button>().Setup()).ToArray();
 
             m_GemStones = GameObject.FindGameObjectsWithTag(GEM_STONE_TAG)
                 .Select((gameObject) => gameObject.GetComponent<GemStone>()).ToArray();

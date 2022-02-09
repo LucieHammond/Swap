@@ -36,7 +36,7 @@ namespace Swap.Setups.Modes
 
             rules.AddRule(new SwapRule());
 
-            rules.AddRule(new ButtonPressRule());
+            rules.AddRule(new ButtonRule());
             rules.AddRule(new GemPickupRule());
             rules.AddRule(new GemReceptionRule());
             rules.AddRule(new DoorOpeningRule());
@@ -63,7 +63,7 @@ namespace Swap.Setups.Modes
 
                 typeof(SwapRule),
 
-                typeof(ButtonPressRule),
+                typeof(ButtonRule),
                 typeof(GemPickupRule),
                 typeof(GemReceptionRule),
                 typeof(DoorOpeningRule),
@@ -87,7 +87,7 @@ namespace Swap.Setups.Modes
 
                 new RuleScheduling(typeof(SwapRule), 1, 0),
 
-                new RuleScheduling(typeof(ButtonPressRule), 1, 0),
+                new RuleScheduling(typeof(ButtonRule), 1, 0),
                 new RuleScheduling(typeof(GemPickupRule), 1, 0),
                 new RuleScheduling(typeof(GemReceptionRule), 1, 0),
 
