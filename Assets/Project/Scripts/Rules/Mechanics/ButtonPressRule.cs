@@ -5,7 +5,6 @@ using Swap.Components;
 using Swap.Data.Descriptors;
 using Swap.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Swap.Rules.Mechanics
 {
@@ -68,8 +67,7 @@ namespace Swap.Rules.Mechanics
             UpdateCoolDownSchedules();
             UpdateActivationSchedules();
 
-            bool pressPossible = InteractionRule.FindEligibleInteraction(
-                m_Buttons.Where((button) => IsReady(button)), (button) => button.Interactivity, out Button interactingButton);
+            bool pressPossible = InteractionRule.FindEligibleInteraction(m_Buttons, out Button interactingButton);
 
             if (ControllerRule.AskedInteraction() && pressPossible)
             {

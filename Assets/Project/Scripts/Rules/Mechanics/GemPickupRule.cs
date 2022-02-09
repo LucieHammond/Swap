@@ -82,9 +82,8 @@ namespace Swap.Rules.Mechanics
             else
             {
                 GemStone interactingGemStone;
-                bool releasePossible = InteractionRule.CheckCurrentInteraction(GetCurrentGemStone, out interactingGemStone);
-                bool retrievePossible = !releasePossible && InteractionRule.FindEligibleInteraction(
-                    m_GemStones, (gemstone) => gemstone.Interactivity, out interactingGemStone);
+                bool releasePossible = InteractionRule.CheckPriorityInteraction(GetCurrentGemStone, out interactingGemStone);
+                bool retrievePossible = !releasePossible && InteractionRule.FindEligibleInteraction(m_GemStones, out interactingGemStone);
 
                 if (ControllerRule.AskedInteraction() && releasePossible)
                 {
@@ -121,7 +120,7 @@ namespace Swap.Rules.Mechanics
             m_PlayerSoul.CurrentlyHeldGems[robotHoldingGem] = gemStone;
             gemStone.transform.SetParent(robotHoldingGem.ObjectRoot, true);
             gemStone.RigidBody.isKinematic = true;
-            gemStone.Interactivity.Collider.isTrigger = true;
+            gemStone.Collider.isTrigger = true;
         }
 
         private void ReleaseControlOfGem(GemStone gemStone, RobotBody robotHoldingGem)
@@ -129,7 +128,7 @@ namespace Swap.Rules.Mechanics
             m_PlayerSoul.CurrentlyHeldGems[robotHoldingGem] = null;
             gemStone.transform.SetParent(m_GemsRoot, true);
             gemStone.RigidBody.isKinematic = false;
-            gemStone.Interactivity.Collider.isTrigger = false;
+            gemStone.Collider.isTrigger = false;
         }
 
         private bool PerformGemRetrieval()
