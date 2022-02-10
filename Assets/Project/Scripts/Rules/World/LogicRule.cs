@@ -1,6 +1,6 @@
 ﻿using GameEngine.PMR.Rules;
 using GameEngine.PMR.Rules.Dependencies;
-using Swap.Data.Models;
+using Swap.Components.Models;
 using Swap.Interfaces;
 using System.Collections.Generic;
 

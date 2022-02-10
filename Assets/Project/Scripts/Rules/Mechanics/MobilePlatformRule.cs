@@ -2,7 +2,7 @@
 using GameEngine.PMR.Rules.Dependencies;
 using Swap.Components;
 using Swap.Components.States;
-using Swap.Data.Models;
+using Swap.Components.Models;
 using Swap.Interfaces;
 using UnityEngine;
 

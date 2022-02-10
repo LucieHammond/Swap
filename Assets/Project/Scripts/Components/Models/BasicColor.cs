@@ -1,4 +1,4 @@
-namespace Swap.Data.Models
+namespace Swap.Components.Models
 {
     public enum BasicColor
     {

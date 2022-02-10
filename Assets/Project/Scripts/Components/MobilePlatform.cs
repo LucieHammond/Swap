@@ -1,5 +1,5 @@
 ﻿using Swap.Components.States;
-using Swap.Data.Models;
+using Swap.Components.Models;
 using System.Collections.Generic;
 using UnityEngine;
 
