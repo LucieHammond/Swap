@@ -15,7 +15,7 @@ TagManager:
   - LightReceiver
   - DataDownloader
   - DataUploader
-  - CustomMechanics
+  - SkillMechanic
   - Door
   - Generator
   - Conveyor
