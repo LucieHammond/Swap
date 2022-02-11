@@ -129,8 +129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RobotRequired: 3
-  EffectType: 0
-  EffectSettings:
+  SkillType: 0
+  Settings:
     Signal: 0
   TriggerPoint: {fileID: 1707890714368864408}
   TriggerRadius: 0.7
