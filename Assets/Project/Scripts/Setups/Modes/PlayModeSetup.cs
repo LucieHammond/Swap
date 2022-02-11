@@ -39,6 +39,7 @@ namespace Swap.Setups.Modes
             rules.AddRule(new ButtonRule());
             rules.AddRule(new GemStoneRule());
             rules.AddRule(new GemReceptacleRule());
+            rules.AddRule(new WeightSkillRule());
             rules.AddRule(new DoorRule());
             rules.AddRule(new GeneratorRule());
             rules.AddRule(new MobilePlatformRule());
@@ -67,6 +68,7 @@ namespace Swap.Setups.Modes
                 typeof(ButtonRule),
                 typeof(GemStoneRule),
                 typeof(GemReceptacleRule),
+                typeof(WeightSkillRule),
                 typeof(DoorRule),
                 typeof(GeneratorRule),
                 typeof(MobilePlatformRule),
@@ -96,6 +98,7 @@ namespace Swap.Setups.Modes
                 new RuleScheduling(typeof(DoorRule), 1, 0),
                 new RuleScheduling(typeof(GeneratorRule), 1, 0),
                 new RuleScheduling(typeof(MobilePlatformRule), 1, 0),
+                new RuleScheduling(typeof(WeightSkillRule), 1, 0),
 
                 new RuleScheduling(typeof(RobotsRepulsionRule), 1, 0),
                 new RuleScheduling(typeof(MotionRule), 1, 0),

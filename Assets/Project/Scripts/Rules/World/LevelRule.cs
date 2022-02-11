@@ -25,6 +25,7 @@ namespace Swap.Rules.World
         private const string BUTTON_TAG = "Button";
         private const string GEM_STONE_TAG = "GemStone";
         private const string GEM_RECEPTACLE_TAG = "GemReceptacle";
+        private const string SKILL_MECHANIC_TAG = "SkillMechanic";
         private const string DOOR_TAG = "Door";
         private const string GENERATOR_TAG = "Generator";
         private const string MOBILE_PLATFORM_TAG = "MobilePlatform";
@@ -56,6 +57,7 @@ namespace Swap.Rules.World
         private Button[] m_Buttons;
         private GemStone[] m_GemStones;
         private GemReceptacle[] m_GemReceptacles;
+        private SkillMechanic[] m_SkillMechanics;
         private Door[] m_Doors;
         private Generator[] m_Generators;
         private MobilePlatform[] m_MobilePlatforms;
@@ -80,6 +82,9 @@ namespace Swap.Rules.World
 
             m_GemReceptacles = GameObject.FindGameObjectsWithTag(GEM_RECEPTACLE_TAG)
                 .Select((gameObject) => gameObject.GetComponent<GemReceptacle>().Setup()).ToArray();
+
+            m_SkillMechanics = GameObject.FindGameObjectsWithTag(SKILL_MECHANIC_TAG)
+                .Select((gameObject) => gameObject.GetComponent<SkillMechanic>().Setup()).ToArray();
 
             m_Doors = GameObject.FindGameObjectsWithTag(DOOR_TAG)
                 .Select((gameObject) => gameObject.GetComponent<Door>().Setup()).ToArray();
@@ -126,6 +131,8 @@ namespace Swap.Rules.World
         public GemStone[] GetGemStones() => m_GemStones;
 
         public GemReceptacle[] GetGemReceptacles() => m_GemReceptacles;
+
+        public SkillMechanic[] GetSkillMechanics() => m_SkillMechanics;
 
         public Door[] GetDoors() => m_Doors;
 

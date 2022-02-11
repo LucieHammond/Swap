@@ -21,6 +21,8 @@ namespace Swap.Interfaces
 
         GemReceptacle[] GetGemReceptacles();
 
+        SkillMechanic[] GetSkillMechanics();
+
         Door[] GetDoors();
 
         Generator[] GetGenerators();
