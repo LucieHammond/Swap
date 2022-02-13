@@ -18,6 +18,6 @@ MonoBehaviour:
     m_Bits: 769
   TargetRadius: 0.035
   TargetOffset: {x: 0, y: 0.05, z: 0}
-  SwapSpeed: 10
+  SwapSpeed: 12
   PlayerDeviation: 0.75
   PartnerDeviation: 0.5

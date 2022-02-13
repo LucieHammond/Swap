@@ -15,4 +15,4 @@ MonoBehaviour:
   ContentId: 
   Name: 4. The small one
   Scene: Level_1.5
-  EndPoint: {x: 0, y: 4.5, z: 32}
+  EndPoint: {x: 0, y: 4.5, z: 35}

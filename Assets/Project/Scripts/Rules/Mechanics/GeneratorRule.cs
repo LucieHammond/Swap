@@ -85,7 +85,7 @@ namespace Swap.Rules.Mechanics
         private void InitiateSpawn(Generator generator)
         {
             generator.LinkedObject.transform.position = generator.SpawnPoint.position;
-            generator.LinkedObject.transform.localRotation = generator.ObjectComponent.DefaultRotation();
+            generator.LinkedObject.transform.localRotation = generator.SpawnPoint.rotation * generator.ObjectComponent.DefaultRotation();
             generator.LinkedObject.SetActive(true);
 
             generator.SpawnObject();
