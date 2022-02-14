@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Level_1.4
   m_EditorClassIdentifier: 
   ContentId: 
-  Name: 3. Moving platforms
+  Name: 4. Moving platforms
   Scene: Level_1.4
   EndPoint: {x: 0, y: 4.5, z: 29}
